@@ -12,53 +12,29 @@
 
 body{
   font-family:'Poppins',sans-serif;
-  background: url('background.png') no-repeat center/cover fixed;
+  background:url('background.png') no-repeat center/cover fixed;
   color:#fff;
 }
 
-/* GLASS EFFECT */
-.glass{
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(10px);
-  border-radius:15px;
-}
-
-/* BIG LOGO */
+/* LOGO */
 .top-logo{
   text-align:center;
-  padding:40px 0;
+  padding:30px;
 }
-
 .top-logo img{
-  height:140px;
-  filter: drop-shadow(0 0 25px #00ffcc);
-  transition:0.4s;
+  height:120px;
+  filter:drop-shadow(0 0 20px #00ffcc);
 }
 
-.top-logo img:hover{
-  transform:scale(1.1);
-  filter: drop-shadow(0 0 40px #00ffcc);
-}
-
-/* HEADER BUTTONS */
-.top-buttons{
-  text-align:center;
-  margin-bottom:20px;
-}
-
+/* BUTTONS */
+.top-buttons{text-align:center}
 .btn{
-  padding:10px 18px;
+  padding:10px 15px;
   margin:5px;
-  background:linear-gradient(45deg,#00ffcc,#00cc99);
+  background:#00ffcc;
   border:none;
   border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
-}
-
-.btn:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 15px #00ffcc;
 }
 
 /* GRID */
@@ -72,22 +48,15 @@ body{
 /* CARD */
 .card{
   padding:30px;
+  background:rgba(0,0,0,0.6);
+  border-radius:10px;
+  text-align:center;
   cursor:pointer;
   transition:0.3s;
-  text-align:center;
 }
-
 .card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 0 25px #00ffcc;
-}
-
-/* SECTIONS */
-.hidden{display:none}
-
-.section{
-  padding:40px;
-  text-align:center;
+  transform:scale(1.05);
+  box-shadow:0 0 20px #00ffcc;
 }
 
 /* ITEMS */
@@ -96,60 +65,18 @@ body{
   flex-wrap:wrap;
   gap:20px;
   justify-content:center;
-}
-
-.item{
-  width:200px;
-  padding:20px;
-  transition:0.3s;
-}
-
-.item:hover{
-  transform:translateY(-10px) scale(1.05);
-  box-shadow:0 0 20px #00ffcc;
-}
-
-/* ABOUT */
-.about-box{
-  max-width:600px;
-  margin:auto;
   padding:30px;
 }
-
-.ip{
-  margin-top:15px;
-  padding:12px;
-  border-radius:8px;
-  background:#000;
-  color:#00ffcc;
-  font-weight:bold;
-}
-
-/* SIDEBAR */
-.sidebar{
-  position:fixed;
-  left:-250px;
-  top:0;
-  width:250px;
-  height:100%;
-  background:#111;
+.item{
+  background:rgba(0,0,0,0.6);
   padding:20px;
-  transition:0.4s;
+  width:200px;
+  border-radius:10px;
+  text-align:center;
 }
-.sidebar.active{left:0}
 
-/* CART */
-.cart{
-  position:fixed;
-  right:-300px;
-  top:0;
-  width:300px;
-  height:100%;
-  background:#111;
-  padding:20px;
-  transition:0.4s;
-}
-.cart.active{right:0}
+/* HIDDEN */
+.hidden{display:none}
 
 /* LOGIN */
 .login{
@@ -165,87 +92,73 @@ body{
 
 <body>
 
-<!-- BIG LOGO -->
+<!-- LOGO -->
 <div class="top-logo">
-  <img src="logo.webp">
+<img src="logo.webp">
 </div>
 
 <!-- BUTTONS -->
 <div class="top-buttons">
-  <button class="btn" onclick="toggleSidebar()">☰ Menu</button>
-  <button class="btn" onclick="toggleCart()">Cart</button>
-  <button class="btn" onclick="toggleLogin()">Login</button>
-</div>
-
-<!-- SIDEBAR -->
-<div class="sidebar" id="sidebar">
-<h3>Menu</h3>
-<p onclick="showMain()">Home</p>
-<p onclick="showSurvival()">Survival</p>
-<p onclick="showAbout()">About</p>
-</div>
-
-<!-- CART -->
-<div class="cart" id="cart">
-<h3>Cart</h3>
-<div id="cartItems"></div>
+<button class="btn" onclick="toggleLogin()">Login</button>
 </div>
 
 <!-- LOGIN -->
 <div class="login" id="loginBox">
 <h3>Admin Login</h3>
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
 <button class="btn" onclick="login()">Login</button>
 </div>
 
 <!-- MAIN -->
-<div class="container" id="main">
+<div id="main" class="container">
 
-<div class="card glass" onclick="showSurvival()">
-  <h2>Survival</h2>
-  <p>Click to open store</p>
+<div class="card" onclick="showSurvival()">
+<h2>Survival</h2>
 </div>
 
-<div class="card glass" onclick="showAbout()">
-  <h2>About</h2>
-  <p>Server info</p>
+<div class="card" onclick="showAbout()">
+<h2>About</h2>
 </div>
 
 </div>
 
-<!-- SURVIVAL -->
-<div id="survival" class="hidden">
-<div class="section">
-<h2>Survival Store</h2>
+<!-- SURVIVAL MENU -->
+<div id="survivalMenu" class="container hidden">
 
+<div class="card" onclick="showRanks()">
+<h2>Ranks</h2>
+</div>
+
+<div class="card" onclick="showCoins()">
+<h2>Coin Shop</h2>
+</div>
+
+</div>
+
+<!-- RANKS -->
+<div id="ranks" class="hidden">
 <div class="items">
-
-<div class="item glass"><h3>Prime</h3><p>₹149</p><button class="btn" onclick="addCart('Prime')">Buy</button></div>
-<div class="item glass"><h3>Leorix+</h3><p>₹299</p><button class="btn" onclick="addCart('Leorix+')">Buy</button></div>
-<div class="item glass"><h3>Mythic</h3><p>₹499</p><button class="btn" onclick="addCart('Mythic')">Buy</button></div>
-
-<div class="item glass"><h3>100 Coins</h3><p>₹50</p><button class="btn" onclick="addCart('100 Coins')">Buy</button></div>
-<div class="item glass"><h3>500 Coins</h3><p>₹200</p><button class="btn" onclick="addCart('500 Coins')">Buy</button></div>
-<div class="item glass"><h3>1000 Coins</h3><p>₹350</p><button class="btn" onclick="addCart('1000 Coins')">Buy</button></div>
-
+<div class="item"><h3>Prime</h3><p>₹149</p></div>
+<div class="item"><h3>Leorix+</h3><p>₹299</p></div>
+<div class="item"><h3>Mythic</h3><p>₹499</p></div>
 </div>
+</div>
+
+<!-- COINS -->
+<div id="coins" class="hidden">
+<div class="items">
+<div class="item"><h3>100 Coins</h3><p>₹50</p></div>
+<div class="item"><h3>500 Coins</h3><p>₹200</p></div>
+<div class="item"><h3>1000 Coins</h3><p>₹350</p></div>
 </div>
 </div>
 
 <!-- ABOUT -->
-<div id="about" class="hidden">
-<div class="section">
+<div id="about" class="hidden" style="text-align:center;padding:40px;">
 <h2>About Leorix MC</h2>
-
-<div class="about-box glass">
 <p>Welcome to Leorix MC Server 🚀</p>
-<p>Enjoy Survival gameplay, ranks and coins!</p>
-
-<div class="ip">play.leorixmc.fun</div>
-</div>
-
-</div>
+<p>Server IP: <b style="color:#00ffcc;">play.leorixmc.fun</b></p>
 </div>
 
 <!-- FIREBASE -->
@@ -254,9 +167,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDaiP357SClEvOcQEm5Rz-X_9X1iXGrqic",
-  authDomain: "leorixstore.firebaseapp.com",
-  projectId: "leorixstore"
+  apiKey: "PASTE_API_KEY",
+  authDomain: "PASTE_AUTH_DOMAIN",
+  projectId: "PASTE_PROJECT_ID"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -267,41 +180,38 @@ window.login = function(){
   let password=document.getElementById('password').value;
 
   signInWithEmailAndPassword(auth,email,password)
-  .then(()=>alert("Login Success"))
+  .then(()=>{
+    alert("Login Success");
+    document.getElementById('loginBox').style.display='none';
+  })
   .catch(()=>alert("Login Failed"));
 }
 </script>
 
 <script>
-function toggleSidebar(){sidebar.classList.toggle('active')}
-function toggleCart(){cart.classList.toggle('active')}
 function toggleLogin(){
-  loginBox.style.display = loginBox.style.display==='block'?'none':'block'
+  let box=document.getElementById('loginBox');
+  box.style.display = box.style.display==='block'?'none':'block';
 }
 
 function showSurvival(){
   main.style.display='none';
-  survival.style.display='block';
-  about.style.display='none';
+  survivalMenu.style.display='grid';
+}
+
+function showRanks(){
+  survivalMenu.style.display='none';
+  ranks.style.display='block';
+}
+
+function showCoins(){
+  survivalMenu.style.display='none';
+  coins.style.display='block';
 }
 
 function showAbout(){
   main.style.display='none';
-  survival.style.display='none';
   about.style.display='block';
-}
-
-function showMain(){
-  main.style.display='grid';
-  survival.style.display='none';
-  about.style.display='none';
-}
-
-let cartData=[];
-function addCart(item){
-  cartData.push(item);
-  cartItems.innerHTML="";
-  cartData.forEach(i=>cartItems.innerHTML+=`<p>${i}</p>`);
 }
 </script>
 
