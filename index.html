@@ -1,52 +1,137 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html>
 <head>
 <title>Leorix MC Store</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-  font-family:sans-serif;
+  font-family:'Poppins',sans-serif;
   background:url('background.png') no-repeat center/cover fixed;
   color:white;
   text-align:center;
 }
 
+/* GLASS EFFECT */
+.glass{
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(8px);
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,255,200,0.2);
+}
+
 /* LOGO */
-.top-logo img{height:120px}
+.top-logo{
+  padding:20px;
+}
+.top-logo img{
+  height:130px;
+  filter:drop-shadow(0 0 25px #00ffcc);
+  transition:0.3s;
+}
+.top-logo img:hover{
+  transform:scale(1.1);
+}
 
 /* BUTTON */
 button{
-  padding:10px;
+  padding:10px 15px;
   margin:5px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(45deg,#00ffcc,#00cc99);
+  color:black;
   cursor:pointer;
+  transition:0.3s;
+}
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 15px #00ffcc;
 }
 
 /* HIDE */
 .hidden{display:none}
 
-/* CARD */
+/* CARDS */
 .card{
-  background:rgba(0,0,0,0.6);
-  padding:20px;
-  margin:20px;
+  margin:20px auto;
+  padding:25px;
+  width:250px;
   cursor:pointer;
+  transition:0.3s;
+}
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 0 25px #00ffcc;
 }
 
-/* ITEM */
+/* ITEMS */
 .item{
-  background:rgba(0,0,0,0.6);
+  margin:10px auto;
   padding:15px;
-  margin:10px;
+  width:250px;
+  transition:0.3s;
+}
+.item:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px #00ffcc;
 }
 
 /* PROFILE */
 #profile{
   position:absolute;
-  top:10px;
-  right:10px;
-  background:black;
+  top:15px;
+  right:15px;
+  background:#111;
   padding:10px;
+  border-radius:8px;
   cursor:pointer;
+}
+
+/* EMAIL BOX */
+#emailBox{
+  position:absolute;
+  top:50px;
+  right:15px;
+  background:#111;
+  padding:10px;
+  border-radius:8px;
+}
+
+/* LOGIN */
+#loginBox{
+  position:fixed;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  padding:30px;
+  border-radius:12px;
+}
+
+input{
+  padding:10px;
+  margin:8px;
+  width:200px;
+  border-radius:6px;
+  border:none;
+}
+
+/* ABOUT STYLE */
+.about-box{
+  margin:40px auto;
+  padding:30px;
+  width:300px;
+  font-size:20px;
+  font-weight:bold;
+  color:#00ffcc;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 10px #00ffcc;}
+  to{box-shadow:0 0 30px #00ffcc;}
 }
 </style>
 </head>
@@ -54,8 +139,8 @@ button{
 <body>
 
 <!-- PROFILE -->
-<div id="profile" class="hidden" onclick="toggleEmail()">Your Account</div>
-<div id="emailBox" class="hidden" style="position:absolute;top:50px;right:10px;background:black;padding:10px;"></div>
+<div id="profile" class="hidden glass" onclick="toggleEmail()">Your Account</div>
+<div id="emailBox" class="hidden glass"></div>
 
 <!-- LOGO -->
 <div class="top-logo">
@@ -65,7 +150,7 @@ button{
 <!-- LOGIN -->
 <button onclick="toggleLogin()" id="loginBtn">Login</button>
 
-<div id="loginBox" class="hidden">
+<div id="loginBox" class="hidden glass">
 <input id="email" placeholder="Email"><br>
 <input id="password" type="password" placeholder="Password"><br>
 <button onclick="login()">Login</button>
@@ -73,41 +158,45 @@ button{
 
 <!-- MAIN -->
 <div id="main">
-<div class="card" onclick="showSurvival()">Survival</div>
-<div class="card" onclick="showAbout()">About</div>
+<div class="card glass" onclick="showSurvival()">Survival</div>
+<div class="card glass" onclick="showAbout()">About</div>
 </div>
 
 <!-- SURVIVAL -->
 <div id="survival" class="hidden">
-<button onclick="showMain()">Back</button>
-<div class="card" onclick="showRanks()">Ranks</div>
-<div class="card" onclick="showCoins()">Coin Shop</div>
+<button onclick="showMain()">⬅ Back</button>
+<div class="card glass" onclick="showRanks()">Ranks</div>
+<div class="card glass" onclick="showCoins()">Coin Shop</div>
 </div>
 
 <!-- RANKS -->
 <div id="ranks" class="hidden">
-<button onclick="showSurvival()">Back</button>
+<button onclick="showSurvival()">⬅ Back</button>
 
-<div class="item">Prime - ₹149</div>
-<div class="item">Leorix+ - ₹299</div>
-<div class="item">Mythic - ₹499</div>
+<div class="item glass">Prime - ₹149</div>
+<div class="item glass">Leorix+ - ₹299</div>
+<div class="item glass">Mythic - ₹499</div>
 
 </div>
 
 <!-- COINS -->
 <div id="coins" class="hidden">
-<button onclick="showSurvival()">Back</button>
+<button onclick="showSurvival()">⬅ Back</button>
 
-<div class="item">100 Coins - ₹50</div>
-<div class="item">500 Coins - ₹200</div>
-<div class="item">1000 Coins - ₹350</div>
+<div class="item glass">100 Coins - ₹50</div>
+<div class="item glass">500 Coins - ₹200</div>
+<div class="item glass">1000 Coins - ₹350</div>
 
 </div>
 
 <!-- ABOUT -->
 <div id="about" class="hidden">
-<button onclick="showMain()">Back</button>
-<h2>play.leorixmc.fun</h2>
+<button onclick="showMain()">⬅ Back</button>
+
+<div class="about-box glass">
+play.leorixmc.fun
+</div>
+
 </div>
 
 <!-- FIREBASE -->
@@ -124,20 +213,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-/* LOGIN */
 window.login = function(){
-  const emailInput = document.getElementById("email").value;
-  const passInput = document.getElementById("password").value;
+  const email=document.getElementById("email").value;
+  const pass=document.getElementById("password").value;
 
-  signInWithEmailAndPassword(auth,emailInput,passInput)
-  .then(()=> {
+  signInWithEmailAndPassword(auth,email,pass)
+  .then(()=>{
     alert("Logged in");
     document.getElementById("loginBox").style.display="none";
   })
   .catch(e=>alert(e.message));
 }
 
-/* USER STATE */
 onAuthStateChanged(auth,(user)=>{
   if(user){
     document.getElementById("profile").classList.remove("hidden");
@@ -147,7 +234,7 @@ onAuthStateChanged(auth,(user)=>{
 });
 </script>
 
-<!-- NAVIGATION -->
+<!-- NAV -->
 <script>
 function hideAll(){
   document.getElementById("main").style.display="none";
@@ -157,11 +244,11 @@ function hideAll(){
   document.getElementById("about").style.display="none";
 }
 
-function showMain(){hideAll();document.getElementById("main").style.display="block";}
-function showSurvival(){hideAll();document.getElementById("survival").style.display="block";}
-function showRanks(){hideAll();document.getElementById("ranks").style.display="block";}
-function showCoins(){hideAll();document.getElementById("coins").style.display="block";}
-function showAbout(){hideAll();document.getElementById("about").style.display="block";}
+function showMain(){hideAll();main.style.display="block";}
+function showSurvival(){hideAll();survival.style.display="block";}
+function showRanks(){hideAll();ranks.style.display="block";}
+function showCoins(){hideAll();coins.style.display="block";}
+function showAbout(){hideAll();about.style.display="block";}
 
 function toggleLogin(){
   let box=document.getElementById("loginBox");
