@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,9 +69,6 @@ button:hover{
   width:260px;
   transition:0.3s;
 }
-.item:hover{
-  transform:scale(1.05);
-}
 
 /* HIDE */
 .hidden{display:none}
@@ -138,7 +136,7 @@ input{
 }
 
 @keyframes leorixGlow{
-  0%{box-shadow:0 0 10px #00ffcc;}
+  0%{box-shadow:0 0 10px #00ffaa;}
   100%{box-shadow:0 0 30px #00ffaa;}
 }
 
@@ -211,9 +209,8 @@ input{
 <div id="ranks" class="hidden">
 <button onclick="show('survival')">⬅ Back</button>
 
-<!-- PRIME -->
 <div class="item glass prime">
-<img src="prime.png" style="width:100%;border-radius:10px;">
+<img src="./prime.png" style="width:100%;border-radius:10px;">
 <h3>Prime - ₹149</h3>
 <div class="perks">
 ✔ /sit<br>
@@ -223,9 +220,8 @@ input{
 </div>
 </div>
 
-<!-- LEORIX+ -->
 <div class="item glass leorix">
-<img src="leorixplus.png" style="width:100%;border-radius:10px;">
+<img src="./leorixplus.png" style="width:100%;border-radius:10px;">
 <h3>Leorix+ - ₹299</h3>
 <div class="perks">
 ✔ /pv 1<br>
@@ -240,9 +236,8 @@ input{
 </div>
 </div>
 
-<!-- MYTHIC -->
 <div class="item glass mythic">
-<img src="mythic.png" style="width:100%;border-radius:10px;">
+<img src="./mythic.png" style="width:100%;border-radius:10px;">
 <h3>Mythic - ₹499</h3>
 <div class="perks">
 ✔ /sit<br>
@@ -260,17 +255,17 @@ input{
 <button onclick="show('survival')">⬅ Back</button>
 
 <div class="item glass">
-<img src="100coins.png" style="width:100%;border-radius:10px;">
+<img src="./100coins.png" style="width:100%;border-radius:10px;">
 <h3>100 Coins - ₹50</h3>
 </div>
 
 <div class="item glass">
-<img src="500coins.png" style="width:100%;border-radius:10px;">
+<img src="./500coins.png" style="width:100%;border-radius:10px;">
 <h3>500 Coins - ₹200</h3>
 </div>
 
 <div class="item glass">
-<img src="1000coins.png" style="width:100%;border-radius:10px;">
+<img src="./1000coins.png" style="width:100%;border-radius:10px;">
 <h3>1000 Coins - ₹350</h3>
 </div>
 
@@ -331,13 +326,11 @@ function show(id){
 }
 
 function toggleLogin(){
-  let box=document.getElementById("loginBox");
-  box.classList.toggle("hidden");
+  document.getElementById("loginBox").classList.toggle("hidden");
 }
 
 function toggleEmail(){
-  let box=document.getElementById("emailBox");
-  box.classList.toggle("hidden");
+  document.getElementById("emailBox").classList.toggle("hidden");
 }
 </script>
 
