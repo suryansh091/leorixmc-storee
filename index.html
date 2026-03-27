@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,44 +12,117 @@
 
 body{
   font-family:'Poppins',sans-serif;
-  background: linear-gradient(rgba(10,20,30,0.9),rgba(10,20,30,0.9)),
-  url('background.png') no-repeat center/cover;
+  background: url('background.png') no-repeat center/cover fixed;
   color:#fff;
 }
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px;
-  background:#0f2535;
+/* GLASS EFFECT */
+.glass{
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  border-radius:15px;
 }
 
-/* LOGO */
-.logo img{
-  height:50px;
-  animation:float 3s infinite;
-  filter: drop-shadow(0 0 10px #00ffcc);
+/* BIG LOGO */
+.top-logo{
+  text-align:center;
+  padding:40px 0;
 }
 
-.logo:hover img{
+.top-logo img{
+  height:140px;
   filter: drop-shadow(0 0 25px #00ffcc);
+  transition:0.4s;
 }
 
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
+.top-logo img:hover{
+  transform:scale(1.1);
+  filter: drop-shadow(0 0 40px #00ffcc);
 }
 
-/* BUTTON */
+/* HEADER BUTTONS */
+.top-buttons{
+  text-align:center;
+  margin-bottom:20px;
+}
+
 .btn{
-  padding:10px 15px;
-  background:#00ffcc;
+  padding:10px 18px;
+  margin:5px;
+  background:linear-gradient(45deg,#00ffcc,#00cc99);
   border:none;
   border-radius:8px;
   cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 15px #00ffcc;
+}
+
+/* GRID */
+.container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  padding:40px;
+}
+
+/* CARD */
+.card{
+  padding:30px;
+  cursor:pointer;
+  transition:0.3s;
+  text-align:center;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 25px #00ffcc;
+}
+
+/* SECTIONS */
+.hidden{display:none}
+
+.section{
+  padding:40px;
+  text-align:center;
+}
+
+/* ITEMS */
+.items{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+}
+
+.item{
+  width:200px;
+  padding:20px;
+  transition:0.3s;
+}
+
+.item:hover{
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 0 20px #00ffcc;
+}
+
+/* ABOUT */
+.about-box{
+  max-width:600px;
+  margin:auto;
+  padding:30px;
+}
+
+.ip{
+  margin-top:15px;
+  padding:12px;
+  border-radius:8px;
+  background:#000;
+  color:#00ffcc;
+  font-weight:bold;
 }
 
 /* SIDEBAR */
@@ -88,38 +160,29 @@ header{
   padding:30px;
   display:none;
 }
-
-/* ITEMS */
-.items{
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-  justify-content:center;
-  padding:30px;
-}
-
-.item{
-  background:#142d3f;
-  padding:20px;
-  width:200px;
-  text-align:center;
-  border-radius:10px;
-  transition:0.3s;
-}
-.item:hover{
-  transform:translateY(-10px);
-  box-shadow:0 0 20px #00ffcc;
-}
 </style>
 </head>
 
 <body>
+
+<!-- BIG LOGO -->
+<div class="top-logo">
+  <img src="logo.webp">
+</div>
+
+<!-- BUTTONS -->
+<div class="top-buttons">
+  <button class="btn" onclick="toggleSidebar()">☰ Menu</button>
+  <button class="btn" onclick="toggleCart()">Cart</button>
+  <button class="btn" onclick="toggleLogin()">Login</button>
+</div>
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
 <h3>Menu</h3>
 <p onclick="showMain()">Home</p>
 <p onclick="showSurvival()">Survival</p>
+<p onclick="showAbout()">About</p>
 </div>
 
 <!-- CART -->
@@ -136,31 +199,52 @@ header{
 <button class="btn" onclick="login()">Login</button>
 </div>
 
-<!-- HEADER -->
-<header>
-<div class="logo">
-  <img src="logo.webp">
-</div>
-
-<div>
-<button class="btn" onclick="toggleSidebar()">☰</button>
-<button class="btn" onclick="toggleCart()">Cart</button>
-<button class="btn" onclick="toggleLogin()">Login</button>
-</div>
-</header>
-
 <!-- MAIN -->
-<div id="main">
-<h2 style="text-align:center;margin-top:20px;">Survival Store</h2>
+<div class="container" id="main">
+
+<div class="card glass" onclick="showSurvival()">
+  <h2>Survival</h2>
+  <p>Click to open store</p>
+</div>
+
+<div class="card glass" onclick="showAbout()">
+  <h2>About</h2>
+  <p>Server info</p>
+</div>
+
+</div>
+
+<!-- SURVIVAL -->
+<div id="survival" class="hidden">
+<div class="section">
+<h2>Survival Store</h2>
 
 <div class="items">
-<div class="item"><h3>Prime</h3><p>₹149</p><button class="btn" onclick="addCart('Prime')">Buy</button></div>
-<div class="item"><h3>Leorix+</h3><p>₹299</p><button class="btn" onclick="addCart('Leorix+')">Buy</button></div>
-<div class="item"><h3>Mythic</h3><p>₹499</p><button class="btn" onclick="addCart('Mythic')">Buy</button></div>
 
-<div class="item"><h3>100 Coins</h3><p>₹50</p><button class="btn" onclick="addCart('100 Coins')">Buy</button></div>
-<div class="item"><h3>500 Coins</h3><p>₹200</p><button class="btn" onclick="addCart('500 Coins')">Buy</button></div>
-<div class="item"><h3>1000 Coins</h3><p>₹350</p><button class="btn" onclick="addCart('1000 Coins')">Buy</button></div>
+<div class="item glass"><h3>Prime</h3><p>₹149</p><button class="btn" onclick="addCart('Prime')">Buy</button></div>
+<div class="item glass"><h3>Leorix+</h3><p>₹299</p><button class="btn" onclick="addCart('Leorix+')">Buy</button></div>
+<div class="item glass"><h3>Mythic</h3><p>₹499</p><button class="btn" onclick="addCart('Mythic')">Buy</button></div>
+
+<div class="item glass"><h3>100 Coins</h3><p>₹50</p><button class="btn" onclick="addCart('100 Coins')">Buy</button></div>
+<div class="item glass"><h3>500 Coins</h3><p>₹200</p><button class="btn" onclick="addCart('500 Coins')">Buy</button></div>
+<div class="item glass"><h3>1000 Coins</h3><p>₹350</p><button class="btn" onclick="addCart('1000 Coins')">Buy</button></div>
+
+</div>
+</div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="hidden">
+<div class="section">
+<h2>About Leorix MC</h2>
+
+<div class="about-box glass">
+<p>Welcome to Leorix MC Server 🚀</p>
+<p>Enjoy Survival gameplay, ranks and coins!</p>
+
+<div class="ip">play.leorixmc.fun</div>
+</div>
+
 </div>
 </div>
 
@@ -179,42 +263,45 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 window.login = function(){
-  let email = document.getElementById('email').value;
-  let password = document.getElementById('password').value;
+  let email=document.getElementById('email').value;
+  let password=document.getElementById('password').value;
 
-  signInWithEmailAndPassword(auth, email, password)
-  .then(()=>{
-    alert("Login Successful 🔥");
-    document.getElementById('loginBox').style.display='none';
-  })
-  .catch(()=>{
-    alert("Login Failed ❌");
-  });
+  signInWithEmailAndPassword(auth,email,password)
+  .then(()=>alert("Login Success"))
+  .catch(()=>alert("Login Failed"));
 }
 </script>
 
-<!-- SCRIPT -->
 <script>
-function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('active');
-}
-
-function toggleCart(){
-  document.getElementById('cart').classList.toggle('active');
-}
-
+function toggleSidebar(){sidebar.classList.toggle('active')}
+function toggleCart(){cart.classList.toggle('active')}
 function toggleLogin(){
-  let box=document.getElementById('loginBox');
-  box.style.display=box.style.display==='block'?'none':'block';
+  loginBox.style.display = loginBox.style.display==='block'?'none':'block'
 }
 
-/* CART */
-let cart=[];
+function showSurvival(){
+  main.style.display='none';
+  survival.style.display='block';
+  about.style.display='none';
+}
+
+function showAbout(){
+  main.style.display='none';
+  survival.style.display='none';
+  about.style.display='block';
+}
+
+function showMain(){
+  main.style.display='grid';
+  survival.style.display='none';
+  about.style.display='none';
+}
+
+let cartData=[];
 function addCart(item){
-  cart.push(item);
-  let c=document.getElementById('cartItems');
-  c.innerHTML="";
-  cart.forEach(i=>c.innerHTML+=`<p>${i}</p>`);
+  cartData.push(item);
+  cartItems.innerHTML="";
+  cartData.forEach(i=>cartItems.innerHTML+=`<p>${i}</p>`);
 }
 </script>
 
