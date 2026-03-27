@@ -10,44 +10,37 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* BACKGROUND */
 body{
   font-family:'Poppins',sans-serif;
   background:url('background.png') no-repeat center/cover fixed;
   color:#fff;
 }
 
-/* HIDE */
 .hidden{display:none !important}
 
 /* LOGO */
-.top-logo{
-  text-align:center;
-  padding:30px;
-}
-.top-logo img{
-  height:130px;
-  filter:drop-shadow(0 0 30px #00ffcc);
-  transition:0.4s;
-}
-.top-logo img:hover{
-  transform:scale(1.1);
-}
+.top-logo{text-align:center;padding:20px;}
+.top-logo img{height:120px;filter:drop-shadow(0 0 25px #00ffcc);}
 
-/* BUTTONS */
-.top-buttons{text-align:center}
+/* HEADER */
+.top-bar{text-align:center;margin-bottom:10px;}
 .btn{
-  padding:10px 16px;
-  margin:6px;
+  padding:10px 15px;
+  margin:5px;
   background:#00ffcc;
   border:none;
   border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
 }
-.btn:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 15px #00ffcc;
+
+/* PROFILE */
+.profile{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:#111;
+  padding:10px 15px;
+  border-radius:8px;
 }
 
 /* GRID */
@@ -58,25 +51,20 @@ body{
   padding:40px;
 }
 
-/* CARDS */
 .card{
-  padding:30px;
   background:rgba(0,0,0,0.6);
+  padding:30px;
   border-radius:12px;
   text-align:center;
   cursor:pointer;
-  transition:0.3s;
 }
-.card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 25px #00ffcc;
-}
+.card:hover{box-shadow:0 0 20px #00ffcc;}
 
 /* ITEMS */
 .items{
   display:flex;
-  flex-wrap:wrap;
   gap:20px;
+  flex-wrap:wrap;
   justify-content:center;
   padding:30px;
 }
@@ -86,11 +74,6 @@ body{
   width:200px;
   border-radius:10px;
   text-align:center;
-  transition:0.3s;
-}
-.item:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px #00ffcc;
 }
 
 /* LOGIN */
@@ -102,44 +85,39 @@ body{
   padding:30px;
   display:none;
   z-index:9999;
-  border-radius:10px;
 }
 input{
   display:block;
   margin:10px auto;
   padding:10px;
-  width:220px;
 }
 
-/* ABOUT */
-.about{
-  text-align:center;
-  padding:40px;
-}
-.ip{
-  margin-top:10px;
-  color:#00ffcc;
-  font-weight:bold;
+/* BACK */
+.back{
+  margin:10px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- PROFILE -->
+<div id="profile" class="profile hidden"></div>
+
 <!-- LOGO -->
 <div class="top-logo">
-  <img src="logo.webp">
+<img src="logo.webp">
 </div>
 
 <!-- BUTTONS -->
-<div class="top-buttons">
-  <button class="btn" onclick="showMain()">Home</button>
-  <button class="btn" onclick="toggleLogin()">Login</button>
+<div class="top-bar">
+<button class="btn" onclick="showMain()">Home</button>
+<button class="btn" id="loginBtn" onclick="toggleLogin()">Login</button>
 </div>
 
 <!-- LOGIN -->
 <div class="login" id="loginBox">
-<h3>Admin Login</h3>
+<h3>Login</h3>
 <input id="email" placeholder="Email">
 <input id="password" type="password" placeholder="Password">
 <button class="btn" onclick="login()">Login</button>
@@ -147,34 +125,22 @@ input{
 
 <!-- MAIN -->
 <div id="main" class="container">
-
-<div class="card" onclick="showSurvival()">
-<h2>Survival</h2>
-<p>Click to open store</p>
-</div>
-
-<div class="card" onclick="showAbout()">
-<h2>About</h2>
-<p>Server info</p>
-</div>
-
+<div class="card" onclick="showSurvival()">Survival</div>
+<div class="card" onclick="showAbout()">About</div>
 </div>
 
 <!-- SURVIVAL MENU -->
 <div id="survivalMenu" class="container hidden">
+<button class="btn back" onclick="showMain()">⬅ Back</button>
 
-<div class="card" onclick="showRanks()">
-<h2>Ranks</h2>
-</div>
-
-<div class="card" onclick="showCoins()">
-<h2>Coin Shop</h2>
-</div>
-
+<div class="card" onclick="showRanks()">Ranks</div>
+<div class="card" onclick="showCoins()">Coin Shop</div>
 </div>
 
 <!-- RANKS -->
 <div id="ranks" class="hidden">
+<button class="btn back" onclick="showSurvival()">⬅ Back</button>
+
 <div class="items">
 <div class="item"><h3>Prime</h3><p>₹149</p></div>
 <div class="item"><h3>Leorix+</h3><p>₹299</p></div>
@@ -184,6 +150,8 @@ input{
 
 <!-- COINS -->
 <div id="coins" class="hidden">
+<button class="btn back" onclick="showSurvival()">⬅ Back</button>
+
 <div class="items">
 <div class="item"><h3>100 Coins</h3><p>₹50</p></div>
 <div class="item"><h3>500 Coins</h3><p>₹200</p></div>
@@ -192,48 +160,47 @@ input{
 </div>
 
 <!-- ABOUT -->
-<div id="about" class="hidden about">
+<div id="about" class="hidden" style="text-align:center;padding:40px;">
+<button class="btn back" onclick="showMain()">⬅ Back</button>
+
 <h2>About Leorix MC</h2>
-<p>Welcome to Leorix MC Server 🚀</p>
-<p>Enjoy ranks, coins and survival gameplay!</p>
-<div class="ip">Server IP: play.leorixmc.fun</div>
+<p>Join and play our only server</p>
+<p style="color:#00ffcc;font-weight:bold;">play.leorixmc.fun</p>
 </div>
 
-<!-- 🔥 FIREBASE -->
+<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-/* ⚠️ REPLACE THIS WITH YOUR REAL CONFIG */
+/* PUT YOUR REAL CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyDaiP357SClEvOcQEm5Rz-X_9X1iXGrqic",
   authDomain: "leorixstore.firebaseapp.com",
   projectId: "leorixstore",
 };
 
-/* INIT */
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 /* LOGIN */
 window.login = function(){
-  let email=document.getElementById('email').value;
-  let password=document.getElementById('password').value;
-
-  if(!email || !password){
-    alert("Enter email & password");
-    return;
-  }
+  let email=emailInput.value;
+  let password=passwordInput.value;
 
   signInWithEmailAndPassword(auth,email,password)
-  .then(()=>{
-    alert("✅ Login Success");
-    loginBox.style.display='none';
-  })
-  .catch((err)=>{
-    alert("❌ " + err.message);
-  });
+  .then(()=>{ alert("Logged in"); loginBox.style.display='none'; })
+  .catch(err=>alert(err.message));
 }
+
+/* USER STATE */
+onAuthStateChanged(auth,(user)=>{
+  if(user){
+    profile.innerText = user.email;
+    profile.classList.remove('hidden');
+    loginBtn.style.display='none';
+  }
+});
 </script>
 
 <!-- NAVIGATION -->
@@ -246,30 +213,11 @@ function hideAll(){
   about.style.display='none';
 }
 
-function showMain(){
-  hideAll();
-  main.style.display='grid';
-}
-
-function showSurvival(){
-  hideAll();
-  survivalMenu.style.display='grid';
-}
-
-function showRanks(){
-  hideAll();
-  ranks.style.display='block';
-}
-
-function showCoins(){
-  hideAll();
-  coins.style.display='block';
-}
-
-function showAbout(){
-  hideAll();
-  about.style.display='block';
-}
+function showMain(){hideAll();main.style.display='grid';}
+function showSurvival(){hideAll();survivalMenu.style.display='grid';}
+function showRanks(){hideAll();ranks.style.display='block';}
+function showCoins(){hideAll();coins.style.display='block';}
+function showAbout(){hideAll();about.style.display='block';}
 
 function toggleLogin(){
   loginBox.style.display = loginBox.style.display==='block'?'none':'block';
