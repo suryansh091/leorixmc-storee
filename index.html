@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Leorix MC Store</title>
@@ -15,7 +15,7 @@ body{
   text-align:center;
 }
 
-/* GLASS EFFECT */
+/* GLASS */
 .glass{
   background:rgba(0,0,0,0.6);
   backdrop-filter:blur(8px);
@@ -24,17 +24,13 @@ body{
 }
 
 /* LOGO */
-.top-logo{
-  padding:20px;
-}
+.top-logo{padding:20px;}
 .top-logo img{
   height:130px;
   filter:drop-shadow(0 0 25px #00ffcc);
   transition:0.3s;
 }
-.top-logo img:hover{
-  transform:scale(1.1);
-}
+.top-logo img:hover{transform:scale(1.1);}
 
 /* BUTTON */
 button{
@@ -52,9 +48,6 @@ button:hover{
   box-shadow:0 0 15px #00ffcc;
 }
 
-/* HIDE */
-.hidden{display:none}
-
 /* CARDS */
 .card{
   margin:20px auto;
@@ -70,15 +63,17 @@ button:hover{
 
 /* ITEMS */
 .item{
-  margin:10px auto;
+  margin:20px auto;
   padding:15px;
-  width:250px;
+  width:260px;
   transition:0.3s;
 }
 .item:hover{
   transform:scale(1.05);
-  box-shadow:0 0 20px #00ffcc;
 }
+
+/* HIDE */
+.hidden{display:none}
 
 /* PROFILE */
 #profile{
@@ -91,7 +86,7 @@ button:hover{
   cursor:pointer;
 }
 
-/* EMAIL BOX */
+/* EMAIL */
 #emailBox{
   position:absolute;
   top:50px;
@@ -118,7 +113,7 @@ input{
   border:none;
 }
 
-/* ABOUT STYLE */
+/* ABOUT */
 .about-box{
   margin:40px auto;
   padding:30px;
@@ -128,10 +123,53 @@ input{
   color:#00ffcc;
   animation:glow 2s infinite alternate;
 }
-
 @keyframes glow{
   from{box-shadow:0 0 10px #00ffcc;}
   to{box-shadow:0 0 30px #00ffcc;}
+}
+
+/* ===================== */
+/* 🔥 RANK GLOW SYSTEM */
+/* ===================== */
+
+@keyframes primeGlow{
+  0%{box-shadow:0 0 10px #00ffcc;}
+  100%{box-shadow:0 0 25px #00ffcc;}
+}
+
+@keyframes leorixGlow{
+  0%{box-shadow:0 0 10px #00ffcc;}
+  100%{box-shadow:0 0 30px #00ffaa;}
+}
+
+@keyframes mythicGlow{
+  0%{box-shadow:0 0 10px #ff00cc;}
+  100%{box-shadow:0 0 40px #ff00ff;}
+}
+
+.prime{
+  border:1px solid #00ffcc;
+  animation:primeGlow 2s infinite alternate;
+}
+
+.leorix{
+  border:1px solid #00ffaa;
+  animation:leorixGlow 2s infinite alternate;
+}
+
+.mythic{
+  border:1px solid #ff00ff;
+  animation:mythicGlow 2s infinite alternate;
+}
+
+.perks{
+  text-align:left;
+  margin-top:10px;
+  font-size:14px;
+  line-height:1.6;
+  padding:10px;
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
 }
 </style>
 </head>
@@ -158,40 +196,89 @@ input{
 
 <!-- MAIN -->
 <div id="main">
-<div class="card glass" onclick="showSurvival()">Survival</div>
-<div class="card glass" onclick="showAbout()">About</div>
+<div class="card glass" onclick="show('survival')">Survival</div>
+<div class="card glass" onclick="show('about')">About</div>
 </div>
 
 <!-- SURVIVAL -->
 <div id="survival" class="hidden">
-<button onclick="showMain()">⬅ Back</button>
-<div class="card glass" onclick="showRanks()">Ranks</div>
-<div class="card glass" onclick="showCoins()">Coin Shop</div>
+<button onclick="show('main')">⬅ Back</button>
+<div class="card glass" onclick="show('ranks')">Ranks</div>
+<div class="card glass" onclick="show('coins')">Coin Shop</div>
 </div>
 
 <!-- RANKS -->
 <div id="ranks" class="hidden">
-<button onclick="showSurvival()">⬅ Back</button>
+<button onclick="show('survival')">⬅ Back</button>
 
-<div class="item glass">Prime - ₹149</div>
-<div class="item glass">Leorix+ - ₹299</div>
-<div class="item glass">Mythic - ₹499</div>
+<!-- PRIME -->
+<div class="item glass prime">
+<img src="prime.png" style="width:100%;border-radius:10px;">
+<h3>Prime - ₹149</h3>
+<div class="perks">
+✔ /sit<br>
+✔ /ec<br>
+✔ /pv 1<br>
+✔ /home 3
+</div>
+</div>
+
+<!-- LEORIX+ -->
+<div class="item glass leorix">
+<img src="leorixplus.png" style="width:100%;border-radius:10px;">
+<h3>Leorix+ - ₹299</h3>
+<div class="perks">
+✔ /pv 1<br>
+✔ /ec<br>
+✔ /craft<br>
+✔ /anvil<br>
+✔ /grindstone<br>
+✔ /hat<br>
+✔ /sit<br>
+✔ /kit (7 day cooldown)<br>
+✔ /home 7
+</div>
+</div>
+
+<!-- MYTHIC -->
+<div class="item glass mythic">
+<img src="mythic.png" style="width:100%;border-radius:10px;">
+<h3>Mythic - ₹499</h3>
+<div class="perks">
+✔ /sit<br>
+✔ /ec<br>
+✔ /pv 1<br>
+✔ /anvil<br>
+✔ /home 5
+</div>
+</div>
 
 </div>
 
 <!-- COINS -->
 <div id="coins" class="hidden">
-<button onclick="showSurvival()">⬅ Back</button>
+<button onclick="show('survival')">⬅ Back</button>
 
-<div class="item glass">100 Coins - ₹50</div>
-<div class="item glass">500 Coins - ₹200</div>
-<div class="item glass">1000 Coins - ₹350</div>
+<div class="item glass">
+<img src="100coins.png" style="width:100%;border-radius:10px;">
+<h3>100 Coins - ₹50</h3>
+</div>
+
+<div class="item glass">
+<img src="500coins.png" style="width:100%;border-radius:10px;">
+<h3>500 Coins - ₹200</h3>
+</div>
+
+<div class="item glass">
+<img src="1000coins.png" style="width:100%;border-radius:10px;">
+<h3>1000 Coins - ₹350</h3>
+</div>
 
 </div>
 
 <!-- ABOUT -->
 <div id="about" class="hidden">
-<button onclick="showMain()">⬅ Back</button>
+<button onclick="show('main')">⬅ Back</button>
 
 <div class="about-box glass">
 play.leorixmc.fun
@@ -220,7 +307,7 @@ window.login = function(){
   signInWithEmailAndPassword(auth,email,pass)
   .then(()=>{
     alert("Logged in");
-    document.getElementById("loginBox").style.display="none";
+    document.getElementById("loginBox").classList.add("hidden");
   })
   .catch(e=>alert(e.message));
 }
@@ -236,28 +323,21 @@ onAuthStateChanged(auth,(user)=>{
 
 <!-- NAV -->
 <script>
-function hideAll(){
-  document.getElementById("main").style.display="none";
-  document.getElementById("survival").style.display="none";
-  document.getElementById("ranks").style.display="none";
-  document.getElementById("coins").style.display="none";
-  document.getElementById("about").style.display="none";
-}
+function show(id){
+  document.querySelectorAll("#main,#survival,#ranks,#coins,#about")
+  .forEach(e=>e.classList.add("hidden"));
 
-function showMain(){hideAll();main.style.display="block";}
-function showSurvival(){hideAll();survival.style.display="block";}
-function showRanks(){hideAll();ranks.style.display="block";}
-function showCoins(){hideAll();coins.style.display="block";}
-function showAbout(){hideAll();about.style.display="block";}
+  document.getElementById(id).classList.remove("hidden");
+}
 
 function toggleLogin(){
   let box=document.getElementById("loginBox");
-  box.style.display = box.style.display==="block"?"none":"block";
+  box.classList.toggle("hidden");
 }
 
 function toggleEmail(){
   let box=document.getElementById("emailBox");
-  box.style.display = box.style.display==="block"?"none":"block";
+  box.classList.toggle("hidden");
 }
 </script>
 
