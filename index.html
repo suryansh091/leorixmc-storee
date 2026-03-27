@@ -1,1 +1,222 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leorix MC Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(rgba(10,20,30,0.9),rgba(10,20,30,0.9)),
+  url('background.png') no-repeat center/cover;
+  color:#fff;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px;
+  background:#0f2535;
+}
+
+/* LOGO */
+.logo img{
+  height:50px;
+  animation:float 3s infinite;
+  filter: drop-shadow(0 0 10px #00ffcc);
+}
+
+.logo:hover img{
+  filter: drop-shadow(0 0 25px #00ffcc);
+}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
+}
+
+/* BUTTON */
+.btn{
+  padding:10px 15px;
+  background:#00ffcc;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:fixed;
+  left:-250px;
+  top:0;
+  width:250px;
+  height:100%;
+  background:#111;
+  padding:20px;
+  transition:0.4s;
+}
+.sidebar.active{left:0}
+
+/* CART */
+.cart{
+  position:fixed;
+  right:-300px;
+  top:0;
+  width:300px;
+  height:100%;
+  background:#111;
+  padding:20px;
+  transition:0.4s;
+}
+.cart.active{right:0}
+
+/* LOGIN */
+.login{
+  position:fixed;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  background:#111;
+  padding:30px;
+  display:none;
+}
+
+/* ITEMS */
+.items{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+  padding:30px;
+}
+
+.item{
+  background:#142d3f;
+  padding:20px;
+  width:200px;
+  text-align:center;
+  border-radius:10px;
+  transition:0.3s;
+}
+.item:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 20px #00ffcc;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+<h3>Menu</h3>
+<p onclick="showMain()">Home</p>
+<p onclick="showSurvival()">Survival</p>
+</div>
+
+<!-- CART -->
+<div class="cart" id="cart">
+<h3>Cart</h3>
+<div id="cartItems"></div>
+</div>
+
+<!-- LOGIN -->
+<div class="login" id="loginBox">
+<h3>Admin Login</h3>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button class="btn" onclick="login()">Login</button>
+</div>
+
+<!-- HEADER -->
+<header>
+<div class="logo">
+  <img src="logo.webp">
+</div>
+
+<div>
+<button class="btn" onclick="toggleSidebar()">☰</button>
+<button class="btn" onclick="toggleCart()">Cart</button>
+<button class="btn" onclick="toggleLogin()">Login</button>
+</div>
+</header>
+
+<!-- MAIN -->
+<div id="main">
+<h2 style="text-align:center;margin-top:20px;">Survival Store</h2>
+
+<div class="items">
+<div class="item"><h3>Prime</h3><p>₹149</p><button class="btn" onclick="addCart('Prime')">Buy</button></div>
+<div class="item"><h3>Leorix+</h3><p>₹299</p><button class="btn" onclick="addCart('Leorix+')">Buy</button></div>
+<div class="item"><h3>Mythic</h3><p>₹499</p><button class="btn" onclick="addCart('Mythic')">Buy</button></div>
+
+<div class="item"><h3>100 Coins</h3><p>₹50</p><button class="btn" onclick="addCart('100 Coins')">Buy</button></div>
+<div class="item"><h3>500 Coins</h3><p>₹200</p><button class="btn" onclick="addCart('500 Coins')">Buy</button></div>
+<div class="item"><h3>1000 Coins</h3><p>₹350</p><button class="btn" onclick="addCart('1000 Coins')">Buy</button></div>
+</div>
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDaiP357SClEvOcQEm5Rz-X_9X1iXGrqic",
+  authDomain: "leorixstore.firebaseapp.com",
+  projectId: "leorixstore"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.login = function(){
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
+
+  signInWithEmailAndPassword(auth, email, password)
+  .then(()=>{
+    alert("Login Successful 🔥");
+    document.getElementById('loginBox').style.display='none';
+  })
+  .catch(()=>{
+    alert("Login Failed ❌");
+  });
+}
+</script>
+
+<!-- SCRIPT -->
+<script>
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('active');
+}
+
+function toggleCart(){
+  document.getElementById('cart').classList.toggle('active');
+}
+
+function toggleLogin(){
+  let box=document.getElementById('loginBox');
+  box.style.display=box.style.display==='block'?'none':'block';
+}
+
+/* CART */
+let cart=[];
+function addCart(item){
+  cart.push(item);
+  let c=document.getElementById('cartItems');
+  c.innerHTML="";
+  cart.forEach(i=>c.innerHTML+=`<p>${i}</p>`);
+}
+</script>
+
+</body>
+</html>
