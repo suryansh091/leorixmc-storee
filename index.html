@@ -88,18 +88,31 @@ button{
 .coin{
   border:1px solid gold;
 }
-
-/* MIDDLE COIN */
 .middle{
   transform:scale(1.1);
   border:2px solid gold;
 }
 
+/* LOGIN FIXED (NO OVERLAP) */
+#loginBox{
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+  margin:10px auto;
+  width:220px;
+}
+
+input{
+  padding:8px;
+  margin:5px;
+  width:180px;
+}
+
 /* ABOUT */
 .about-box{
-  max-width:700px;
+  max-width:750px;
   margin:30px auto;
-  padding:25px;
+  padding:30px;
   font-size:15px;
   line-height:1.8;
   text-align:left;
@@ -116,31 +129,14 @@ button{
   font-size:18px;
   color:#00ffcc;
 }
-
-/* LOGIN FIX (OUTSIDE FLOW) */
-#loginBox{
-  position:fixed;
-  top:15px;
-  right:15px;
-  background:#111;
-  padding:15px;
-  border-radius:10px;
-  z-index:999;
-}
-
-input{
-  padding:8px;
-  margin:5px;
-  width:180px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN (fixed separate) -->
-<div id="loginBox">
-<h4>Login</h4>
+<!-- LOGIN (FIXED SAFE UI) -->
+<div id="loginBox" class="glass">
+<h3>Login</h3>
 <input placeholder="Email"><br>
 <input type="password" placeholder="Password"><br>
 <button>Login</button>
@@ -154,10 +150,10 @@ input{
 
 <!-- SURVIVAL -->
 <div id="survival" class="hidden">
-  <button onclick="show('main')">⬅ Back</button>
+<button onclick="show('main')">⬅ Back</button>
 
-  <div class="card glass" onclick="show('ranks')">Ranks</div>
-  <div class="card glass" onclick="show('coins')">Coins Shop</div>
+<div class="card glass" onclick="show('ranks')">Ranks</div>
+<div class="card glass" onclick="show('coins')">Coins Shop</div>
 </div>
 
 <!-- RANKS -->
@@ -219,7 +215,7 @@ input{
 </div>
 </div>
 
-<!-- COINS SHOP FIXED -->
+<!-- COINS SHOP (NOW INSIDE SURVIVAL WORKING) -->
 <div id="coins" class="hidden">
 <button onclick="show('survival')">⬅ Back</button>
 
@@ -243,7 +239,7 @@ input{
 </div>
 </div>
 
-<!-- ABOUT (VERY ATTRACTIVE) -->
+<!-- ABOUT (FULLY REDESIGNED) -->
 <div id="about" class="hidden">
 <button onclick="show('main')">⬅ Back</button>
 
@@ -252,25 +248,25 @@ input{
 <h2>🌟 Welcome to LeorixMC</h2>
 
 <p>
-Step into a next-level Minecraft survival experience where every player has equal opportunity to grow, fight, and dominate.
+LeorixMC is not just a Minecraft server — it is a fully immersive survival experience built for players who love competition, progression, and fair gameplay.
 </p>
 
 <p>
-⚔ Our server is built for fairness, competition, and fun. Whether you are a starter or a pro, there is always something powerful waiting for you.
+Here every player starts equal, and your journey depends on skill, strategy, and upgrades you choose.
 </p>
 
 <p>
-🔥 Features:
+⚔ What we offer:
 - Balanced survival economy  
-- Exclusive ranks & kits  
-- Fair PvP system  
-- Active community  
-- Smooth gameplay performance  
+- Premium rank system  
+- Custom kits & rewards  
+- Smooth and lag-free gameplay  
+- Active and friendly community  
 </p>
 
 <p>
-💎 Why LeorixMC?
-Because we don’t just sell ranks — we create an experience where every upgrade actually matters.
+🔥 Why players love us:
+We focus on fairness, fun, and long-term progression instead of pay-to-win mechanics.
 </p>
 
 <div class="server-ip">
