@@ -19,7 +19,7 @@ body{
 .section{display:none;}
 .active{display:block;}
 
-/* GLASS UI */
+/* GLASS */
 .glass{
   background:rgba(0,0,0,0.65);
   backdrop-filter:blur(10px);
@@ -52,8 +52,8 @@ button{
   position:absolute;
   top:20px;
   right:20px;
-  font-size:18px;
   padding:8px 12px;
+  cursor:pointer;
 }
 
 /* COIN SHOP */
@@ -74,10 +74,41 @@ button{
 
 .coin:hover{transform:scale(1.05);}
 
-/* CENTER BIG BOX */
 .featured{
   transform:scale(1.2);
   border:2px solid gold;
+}
+
+/* RANKS */
+.ranks-container{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.item{
+  width:260px;
+  padding:15px;
+}
+
+.leorix{transform:scale(1.1);border:2px solid #00ffaa;}
+.prime{border:1px solid #00ffcc;}
+.mythic{border:1px solid #ff00ff;}
+
+.perks{
+  margin-top:10px;
+  padding:10px;
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
+  text-align:left;
+  font-size:14px;
+}
+
+.kit-img{
+  width:100%;
+  border-radius:10px;
+  margin-top:10px;
 }
 
 /* CART */
@@ -90,7 +121,7 @@ button{
   display:none;
 }
 
-/* LOGIN BOX */
+/* LOGIN */
 #loginBox{
   position:fixed;
   top:50%;
@@ -134,47 +165,102 @@ input{
 <!-- SURVIVAL -->
 <div id="survival" class="section">
   <button onclick="show('main')">⬅ Back</button>
+  <div class="card glass" onclick="show('ranks')">Ranks</div>
   <div class="card glass" onclick="show('coinshop')">Coin Shop</div>
+</div>
+
+<!-- RANKS -->
+<div id="ranks" class="section">
+<button onclick="show('survival')">⬅ Back</button>
+
+<div class="ranks-container">
+
+  <div class="item glass prime">
+    <img src="./prime.png">
+    <h3>Prime - ₹149</h3>
+    <div class="perks">
+      <div>✔ /sit</div>
+      <div>✔ /ec</div>
+      <div>✔ /pv 1</div>
+      <div>✔ /home 3</div>
+    </div>
+    <img src="./prime-kit.png" class="kit-img">
+    <h4>Prime Kit</h4>
+  </div>
+
+  <div class="item glass leorix">
+    <img src="./leorixplus.png">
+    <h3>Leorix+ - ₹299</h3>
+    <div class="perks">
+      <div>✔ /pv 1</div>
+      <div>✔ /ec</div>
+      <div>✔ /craft</div>
+      <div>✔ /anvil</div>
+      <div>✔ /grindstone</div>
+      <div>✔ /hat</div>
+      <div>✔ /sit</div>
+      <div>✔ /kit (7 day cooldown)</div>
+      <div>✔ /home 7</div>
+    </div>
+    <img src="./leorix-kit.png" class="kit-img">
+    <h4>Leorix+ Kit</h4>
+  </div>
+
+  <div class="item glass mythic">
+    <img src="./mythic.png">
+    <h3>Mythic - ₹499</h3>
+    <div class="perks">
+      <div>✔ /sit</div>
+      <div>✔ /ec</div>
+      <div>✔ /pv 1</div>
+      <div>✔ /anvil</div>
+      <div>✔ /home 5</div>
+    </div>
+    <img src="./mythic-kit.png" class="kit-img">
+    <h4>Mythic Kit</h4>
+  </div>
+
+</div>
 </div>
 
 <!-- COIN SHOP -->
 <div id="coinshop" class="section">
-  <button onclick="show('survival')">⬅ Back</button>
+<button onclick="show('survival')">⬅ Back</button>
 
-  <div class="coin-container">
+<div class="coin-container">
 
-    <div class="coin glass">
-      <h3>100 Coins</h3>
-      <h2>₹49</h2>
-      <button onclick="addToCart('100 Coins',49)">Buy</button>
-    </div>
-
-    <div class="coin glass featured">
-      <h3>1000 Coins</h3>
-      <h1>₹349</h1>
-      <button onclick="addToCart('1000 Coins',349)">Buy</button>
-    </div>
-
-    <div class="coin glass">
-      <h3>500 Coins</h3>
-      <h2>₹199</h2>
-      <button onclick="addToCart('500 Coins',199)">Buy</button>
-    </div>
-
+  <div class="coin glass">
+    <h3>100 Coins</h3>
+    <h2>₹49</h2>
+    <button onclick="addToCart('100 Coins',49)">Buy</button>
   </div>
+
+  <div class="coin glass featured">
+    <h3>1000 Coins</h3>
+    <h1>₹349</h1>
+    <button onclick="addToCart('1000 Coins',349)">Buy</button>
+  </div>
+
+  <div class="coin glass">
+    <h3>500 Coins</h3>
+    <h2>₹199</h2>
+    <button onclick="addToCart('500 Coins',199)">Buy</button>
+  </div>
+
+</div>
 </div>
 
 <!-- ABOUT -->
 <div id="about" class="section">
-  <button onclick="show('main')">⬅ Back</button>
+<button onclick="show('main')">⬅ Back</button>
 
-  <div class="card glass">
-    <h2>Leorix SMP</h2>
-    <p>
-      Best survival server ⚔️<br><br>
-      IP: <b>play.leorixmc.fun</b>
-    </p>
-  </div>
+<div class="card glass">
+  <h2>Leorix SMP</h2>
+  <p>
+    Best survival server ⚔️<br><br>
+    IP: <b>play.leorixmc.fun</b>
+  </p>
+</div>
 </div>
 
 <!-- CART -->
@@ -184,7 +270,7 @@ input{
   <h4 id="total">₹0</h4>
 </div>
 
-<!-- NAVIGATION -->
+<!-- NAV -->
 <script>
 function show(id){
   document.querySelectorAll(".section").forEach(sec=>{
@@ -194,7 +280,7 @@ function show(id){
 }
 </script>
 
-<!-- LOGIN SYSTEM (REAL FRONTEND) -->
+<!-- LOGIN -->
 <script>
 function login(){
   const email = document.getElementById("email").value;
@@ -210,7 +296,6 @@ function login(){
   }
 }
 
-/* auto login */
 window.onload = ()=>{
   const user = localStorage.getItem("user");
   if(user){
