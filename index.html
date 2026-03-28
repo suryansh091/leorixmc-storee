@@ -42,6 +42,14 @@ button{
   cursor:pointer;
 }
 
+/* LAYOUT */
+.container{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
 /* ITEMS */
 .item{
   margin:20px auto;
@@ -49,21 +57,12 @@ button{
   width:260px;
 }
 
-/* RANK LAYOUT */
-.ranks-container{
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  gap:20px;
-  flex-wrap:wrap;
-}
-
-/* RANK SPECIALS */
+/* RANKS */
 .prime{border:1px solid #00ffcc;}
 .leorix{border:2px solid #00ffaa; transform:scale(1.1);}
 .mythic{border:1px solid #ff00ff;}
 
-/* PERKS FIX (VERTICAL) */
+/* PERKS */
 .perks{
   margin-top:10px;
   padding:10px;
@@ -73,17 +72,41 @@ button{
   display:flex;
   flex-direction:column;
   gap:6px;
-
   text-align:left;
   font-size:14px;
 }
 
-/* KIT IMAGE FIX */
+/* KIT IMAGE */
 .kit-img{
   width:100%;
   border-radius:10px;
   margin-top:10px;
   display:block;
+}
+
+/* COINS */
+.coin{
+  border:1px solid gold;
+}
+
+/* ABOUT */
+.about-box{
+  max-width:650px;
+  margin:30px auto;
+  padding:25px;
+  font-size:15px;
+  line-height:1.8;
+  text-align:left;
+}
+.server-ip{
+  margin-top:10px;
+  padding:10px;
+  background:rgba(0,255,204,0.1);
+  border:1px solid #00ffcc;
+  border-radius:10px;
+  text-align:center;
+  font-weight:bold;
+  color:#00ffcc;
 }
 </style>
 </head>
@@ -93,21 +116,25 @@ button{
 <!-- MAIN -->
 <div id="main">
   <div class="card glass" onclick="show('survival')">Survival</div>
+  <div class="card glass" onclick="show('about')">About</div>
 </div>
 
 <!-- SURVIVAL -->
 <div id="survival" class="hidden">
-  <button onclick="show('main')">⬅ Back</button>
-  <div class="card glass" onclick="show('ranks')">Ranks</div>
+
+<button onclick="show('main')">⬅ Back</button>
+
+<div class="card glass" onclick="show('ranks')">Ranks</div>
+<div class="card glass" onclick="show('coins')">Coins Shop</div>
+
 </div>
 
 <!-- RANKS -->
 <div id="ranks" class="hidden">
 <button onclick="show('survival')">⬅ Back</button>
 
-<div class="ranks-container">
+<div class="container">
 
-  <!-- PRIME -->
   <div class="item glass prime">
     <img src="./prime.png" style="width:100%;border-radius:10px;">
     <h3>Prime - ₹149</h3>
@@ -123,7 +150,6 @@ button{
     <h4>Prime Kit</h4>
   </div>
 
-  <!-- LEORIX+ -->
   <div class="item glass leorix">
     <img src="./leorixplus.png" style="width:100%;border-radius:10px;">
     <h3>Leorix+ - ₹299</h3>
@@ -134,9 +160,8 @@ button{
       <div>✔ /craft</div>
       <div>✔ /anvil</div>
       <div>✔ /grindstone</div>
-      <div>✔ /hat</div>
       <div>✔ /sit</div>
-      <div>✔ /kit (7 day cooldown)</div>
+      <div>✔ /hat</div>
       <div>✔ /home 7</div>
     </div>
 
@@ -144,7 +169,6 @@ button{
     <h4>Leorix+ Kit</h4>
   </div>
 
-  <!-- MYTHIC -->
   <div class="item glass mythic">
     <img src="./mythic.png" style="width:100%;border-radius:10px;">
     <h3>Mythic - ₹499</h3>
@@ -164,9 +188,69 @@ button{
 </div>
 </div>
 
+<!-- COINS -->
+<div id="coins" class="hidden">
+<button onclick="show('survival')">⬅ Back</button>
+
+<div class="container">
+
+  <div class="item glass coin">
+    <img src="./coins1.png" style="width:100%;border-radius:10px;">
+    <h3>1,000 Coins - ₹49</h3>
+  </div>
+
+  <div class="item glass coin" style="transform:scale(1.1);border:2px solid gold;">
+    <img src="./coins2.png" style="width:100%;border-radius:10px;">
+    <h3>5,000 Coins - ₹149</h3>
+  </div>
+
+  <div class="item glass coin">
+    <img src="./coins3.png" style="width:100%;border-radius:10px;">
+    <h3>10,000 Coins - ₹249</h3>
+  </div>
+
+</div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="hidden">
+<button onclick="show('main')">⬅ Back</button>
+
+<div class="about-box glass">
+
+<h2>🌟 About LeorixMC Store</h2>
+
+<p>
+Welcome to <b>LeorixMC Store</b> – your ultimate Minecraft survival shop where you can upgrade your gameplay with exclusive ranks, powerful kits, and premium coin packages.
+</p>
+
+<p>
+We focus on fair survival balance, high-quality rewards, and a smooth player experience that keeps the game fun and competitive.
+</p>
+
+<p>
+🔥 Why choose us?
+- Balanced survival economy  
+- Exclusive donor perks  
+- Custom kits & rewards  
+- Clean and fair gameplay system  
+- Premium server experience  
+</p>
+
+<p>
+💎 Join the adventure, upgrade your power, and become a legend on our server!
+</p>
+
+<div class="server-ip">
+Server IP: play.leorixmc.fun
+</div>
+
+</div>
+</div>
+
 <script>
 function show(id){
-  document.querySelectorAll("#main,#survival,#ranks")
+  document.querySelectorAll("#main,#survival,#ranks,#coins,#about")
   .forEach(e=>e.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
