@@ -15,8 +15,7 @@ body{
   text-align:center;
 }
 
-.hidden{display:none !important;}
-
+/* GLASS */
 .glass{
   background:rgba(0,0,0,0.6);
   backdrop-filter:blur(8px);
@@ -24,6 +23,7 @@ body{
   box-shadow:0 0 20px rgba(0,255,200,0.2);
 }
 
+/* BUTTON */
 button{
   padding:10px 15px;
   margin:5px;
@@ -34,6 +34,7 @@ button{
   cursor:pointer;
 }
 
+/* CARDS */
 .card{
   margin:20px auto;
   padding:25px;
@@ -41,40 +42,19 @@ button{
   cursor:pointer;
 }
 
+/* ITEMS */
 .item{
   margin:20px auto;
   padding:15px;
   width:260px;
 }
 
+/* FLEX */
 .ranks-container{
   display:flex;
   justify-content:center;
-  align-items:flex-start;
   gap:20px;
   flex-wrap:wrap;
-}
-
-.prime{border:1px solid #00ffcc;}
-.leorix{border:2px solid #00ffaa; transform:scale(1.1);}
-.mythic{border:1px solid #ff00ff;}
-
-.perks{
-  margin-top:10px;
-  padding:10px;
-  background:rgba(255,255,255,0.05);
-  border-radius:10px;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  text-align:left;
-  font-size:14px;
-}
-
-.kit-img{
-  width:100%;
-  border-radius:10px;
-  margin-top:10px;
 }
 
 /* PROFILE */
@@ -84,14 +64,12 @@ button{
   right:20px;
   font-size:26px;
   cursor:pointer;
-  z-index:999;
 }
 
-/* COIN BOX */
+/* COINS */
 .coin-box{
   width:280px;
   padding:20px;
-  text-align:center;
 }
 
 .coin-box img{
@@ -118,68 +96,33 @@ button{
 </div>
 
 <!-- SURVIVAL -->
-<div id="survival" class="hidden">
+<div id="survival">
   <button onclick="show('main')">⬅ Back</button>
   <div class="card glass" onclick="show('ranks')">Ranks</div>
   <div class="card glass" onclick="show('coinshop')">Coin Shop</div>
 </div>
 
 <!-- RANKS -->
-<div id="ranks" class="hidden">
+<div id="ranks">
 <button onclick="show('survival')">⬅ Back</button>
 
 <div class="ranks-container">
-
-  <div class="item glass prime">
-    <img src="./prime.png" style="width:100%;border-radius:10px;">
+  <div class="item glass">
     <h3>Prime - ₹149</h3>
-    <div class="perks">
-      <div>✔ /sit</div>
-      <div>✔ /ec</div>
-      <div>✔ /pv 1</div>
-      <div>✔ /home 3</div>
-    </div>
-    <img src="./prime-kit.png" class="kit-img">
-    <h4>Prime Kit</h4>
   </div>
 
-  <div class="item glass leorix">
-    <img src="./leorixplus.png" style="width:100%;border-radius:10px;">
+  <div class="item glass">
     <h3>Leorix+ - ₹299</h3>
-    <div class="perks">
-      <div>✔ /pv 1</div>
-      <div>✔ /ec</div>
-      <div>✔ /craft</div>
-      <div>✔ /anvil</div>
-      <div>✔ /grindstone</div>
-      <div>✔ /hat</div>
-      <div>✔ /sit</div>
-      <div>✔ /kit (7 day cooldown)</div>
-      <div>✔ /home 7</div>
-    </div>
-    <img src="./leorix-kit.png" class="kit-img">
-    <h4>Leorix+ Kit</h4>
   </div>
 
-  <div class="item glass mythic">
-    <img src="./mythic.png" style="width:100%;border-radius:10px;">
+  <div class="item glass">
     <h3>Mythic - ₹499</h3>
-    <div class="perks">
-      <div>✔ /sit</div>
-      <div>✔ /ec</div>
-      <div>✔ /pv 1</div>
-      <div>✔ /anvil</div>
-      <div>✔ /home 5</div>
-    </div>
-    <img src="./mythic-kit.png" class="kit-img">
-    <h4>Mythic Kit</h4>
   </div>
-
 </div>
 </div>
 
 <!-- COIN SHOP -->
-<div id="coinshop" class="hidden">
+<div id="coinshop">
   <button onclick="show('survival')">⬅ Back</button>
 
   <div class="ranks-container">
@@ -188,104 +131,71 @@ button{
       <img src="./100coins.png">
       <h2>100 Coins</h2>
       <h1 class="price">₹49</h1>
-      <button onclick="addToCart('100 Coins',49)">Buy</button>
+      <button>Buy</button>
     </div>
 
     <div class="item glass coin-box">
       <img src="./500coins.png">
       <h2>500 Coins</h2>
       <h1 class="price">₹199</h1>
-      <button onclick="addToCart('500 Coins',199)">Buy</button>
+      <button>Buy</button>
     </div>
 
     <div class="item glass coin-box">
       <img src="./1000coins.png">
       <h2>1000 Coins</h2>
       <h1 class="price">₹349</h1>
-      <button onclick="addToCart('1000 Coins',349)">Buy</button>
+      <button>Buy</button>
     </div>
 
   </div>
 </div>
 
 <!-- ABOUT -->
-<div id="about" class="hidden">
+<div id="about">
   <button onclick="show('main')">⬅ Back</button>
 
   <div class="card glass">
     <h2>About Leorix SMP</h2>
-    <p style="margin-top:10px;line-height:1.6;">
-      Welcome to Leorix SMP — a premium survival experience built for fun,
-      grinding, and competitive gameplay.
-      <br><br>
-      Enjoy custom ranks, economy, coin shop, and exciting kits.
+    <p>
+      Welcome to Leorix SMP — a fun survival server with ranks,
+      economy and coin shop.
       <br><br>
       IP: <b>play.leorixmc.fun</b>
     </p>
   </div>
 </div>
 
-<!-- LOGIN BOX -->
-<div id="loginBox" class="glass hidden" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;width:280px;z-index:1000;">
-  <h3>Login</h3>
-  <input id="email" placeholder="Email" style="width:100%;margin:5px;padding:8px;">
-  <input id="pass" type="password" placeholder="Password" style="width:100%;margin:5px;padding:8px;">
+<!-- LOGIN -->
+<div id="loginBox" class="glass" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;">
+  <input id="email" placeholder="Email"><br>
+  <input id="pass" type="password" placeholder="Password"><br>
   <button onclick="login()">Login</button>
 </div>
 
-<!-- NAV FIX -->
 <script>
 function show(id){
-  const sections = ["main","survival","ranks","coinshop","about"];
-  sections.forEach(sec=>{
-    document.getElementById(sec).classList.add("hidden");
-  });
-  document.getElementById(id).classList.remove("hidden");
-}
-</script>
+  document.getElementById("main").style.display="none";
+  document.getElementById("survival").style.display="none";
+  document.getElementById("ranks").style.display="none";
+  document.getElementById("coinshop").style.display="none";
+  document.getElementById("about").style.display="none";
 
-<!-- CART -->
-<script>
-function addToCart(name,price){
-  alert(name+" added to cart");
-}
-</script>
-
-<!-- FIREBASE -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDaiP357SClEvOcQEm5Rz-X_9X1iXGrqic",
-  authDomain: "leorixstore.firebaseapp.com",
-  projectId: "leorixstore"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.toggleLogin=function(){
-  document.getElementById("loginBox").classList.toggle("hidden");
+  document.getElementById(id).style.display="block";
 }
 
-window.login=function(){
-  const email=document.getElementById("email").value;
-  const pass=document.getElementById("pass").value;
+// DEFAULT PAGE
+show("main");
 
-  signInWithEmailAndPassword(auth,email,pass)
-  .then(()=>{
-    document.getElementById("profile").innerText="🟢";
-    document.getElementById("loginBox").classList.add("hidden");
-  })
-  .catch(err=>alert(err.message));
+// LOGIN UI
+function toggleLogin(){
+  let box=document.getElementById("loginBox");
+  box.style.display = box.style.display==="none"?"block":"none";
 }
 
-onAuthStateChanged(auth,user=>{
-  if(user){
-    document.getElementById("profile").innerText="🟢";
-  }
-});
+function login(){
+  alert("Login working (Firebase optional)");
+}
 </script>
 
 </body>
