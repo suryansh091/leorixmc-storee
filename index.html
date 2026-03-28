@@ -7,7 +7,6 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 .hidden{display:none}
 
 body{
@@ -62,6 +61,11 @@ button{
   flex-wrap:wrap;
 }
 
+/* RANK BORDERS */
+.prime{border:1px solid #00ffcc;}
+.leorix{border:2px solid #00ffaa; transform:scale(1.08);}
+.mythic{border:1px solid #ff00ff;}
+
 /* PERKS */
 .perks{
   margin-top:10px;
@@ -75,8 +79,8 @@ button{
   font-size:14px;
 }
 
-/* KIT */
-.kit-img{
+/* IMAGES */
+.kit-img,.coin-img{
   width:100%;
   border-radius:10px;
   margin-top:10px;
@@ -92,21 +96,16 @@ button{
   border:1px solid #00ffcc;
   box-shadow:0 0 25px rgba(0,255,200,0.3);
 }
-
 .about-title{
   font-size:24px;
   color:#00ffcc;
-  margin-bottom:10px;
 }
-
 .ip{
-  font-size:18px;
-  color:#ffffff;
-  margin-top:10px;
+  margin-top:15px;
   padding:10px;
-  background:rgba(0,0,0,0.4);
+  background:black;
   border-radius:8px;
-  display:inline-block;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -122,31 +121,8 @@ button{
 <!-- SURVIVAL -->
 <div id="survival" class="hidden">
   <button onclick="show('main')">⬅ Back</button>
-
   <div class="card glass" onclick="show('ranks')">Ranks</div>
   <div class="card glass" onclick="show('coinshop')">Coin Shop 🪙</div>
-</div>
-
-<!-- COIN SHOP -->
-<div id="coinshop" class="hidden">
-  <button onclick="show('survival')">⬅ Back</button>
-
-  <div class="card glass">
-    <h2>🪙 Coin Shop</h2>
-    <p>Buy exclusive items using coins</p>
-  </div>
-
-  <div class="card glass">
-    <h3>Starter Pack</h3>
-    <p>100 Coins</p>
-    <button>Buy</button>
-  </div>
-
-  <div class="card glass">
-    <h3>Elite Pack</h3>
-    <p>500 Coins</p>
-    <button>Buy</button>
-  </div>
 </div>
 
 <!-- RANKS -->
@@ -155,31 +131,78 @@ button{
 
 <div class="ranks-container">
 
-  <div class="item glass">
-    <h3>Ranks Section</h3>
+  <div class="item glass prime">
+    <img src="./prime.png">
+    <h3>Prime - ₹149</h3>
+    <div class="perks">
+      <div>✔ /sit</div><div>✔ /ec</div><div>✔ /pv 1</div><div>✔ /home 3</div>
+    </div>
+    <img src="./prime-kit.png" class="kit-img">
   </div>
 
+  <div class="item glass leorix">
+    <img src="./leorixplus.png">
+    <h3>Leorix+ - ₹299</h3>
+    <div class="perks">
+      <div>✔ /pv 1</div><div>✔ /ec</div><div>✔ /craft</div>
+      <div>✔ /anvil</div><div>✔ /grindstone</div><div>✔ /hat</div>
+      <div>✔ /sit</div><div>✔ /kit (7d)</div><div>✔ /home 7</div>
+    </div>
+    <img src="./leorix-kit.png" class="kit-img">
+  </div>
+
+  <div class="item glass mythic">
+    <img src="./mythic.png">
+    <h3>Mythic - ₹499</h3>
+    <div class="perks">
+      <div>✔ /sit</div><div>✔ /ec</div><div>✔ /pv 1</div>
+      <div>✔ /anvil</div><div>✔ /home 5</div>
+    </div>
+    <img src="./mythic-kit.png" class="kit-img">
+  </div>
+
+</div>
+</div>
+
+<!-- COIN SHOP -->
+<div id="coinshop" class="hidden">
+<button onclick="show('survival')">⬅ Back</button>
+
+<div class="ranks-container">
+  <div class="item glass">
+    <img src="./coins1.png" class="coin-img">
+    <h3>100 Coins - ₹99</h3>
+    <button>Buy</button>
+  </div>
+
+  <div class="item glass">
+    <img src="./coins2.png" class="coin-img">
+    <h3>500 Coins - ₹299</h3>
+    <button>Buy</button>
+  </div>
+
+  <div class="item glass">
+    <img src="./coins3.png" class="coin-img">
+    <h3>1000 Coins - ₹499</h3>
+    <button>Buy</button>
+  </div>
 </div>
 </div>
 
 <!-- ABOUT -->
 <div id="about" class="hidden">
-  <button onclick="show('main')">⬅ Back</button>
+<button onclick="show('main')">⬅ Back</button>
 
-  <div class="about-box glass">
-    <div class="about-title">🚀 Leorix MC Server</div>
-
-    <p>
-      Welcome to the official Leorix Minecraft Store.<br>
-      Buy ranks, coins and upgrades to enhance your survival journey.
-    </p>
-
-    <p style="margin-top:10px;color:#aaa;">
-      🔥 Custom Survival Economy | ⚔ PvP Enabled | 🏆 Events Every Week
-    </p>
-
-    <div class="ip">🌐 IP: play.leorixmc.fun</div>
-  </div>
+<div class="about-box glass">
+  <div class="about-title">🚀 Leorix MC</div>
+  <p style="margin-top:10px;">
+    Custom survival server with ranks, economy, and events.
+  </p>
+  <p style="margin-top:10px;color:#aaa;">
+    ⚔ PvP • 🏆 Events • 💰 Economy • 🔥 Custom Kits
+  </p>
+  <div class="ip">IP: play.leorixmc.fun</div>
+</div>
 </div>
 
 <script>
@@ -190,11 +213,8 @@ function show(id){
 }
 </script>
 
-<!-- FIREBASE CONFIG (ADD YOUR DETAILS) -->
+<!-- FIREBASE (YOUR CONFIG ADDED) -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyDaiP357SClEvOcQEm5Rz-X_9X1iXGrqic",
@@ -202,7 +222,8 @@ const firebaseConfig = {
   projectId: "leorixstore",
   storageBucket: "leorixstore.firebasestorage.app",
   messagingSenderId: "313859928598",
-  appId: "1:313859928598:web:2c5e728431bdf52a39bb37"
+  appId: "1:313859928598:web:2c5e728431bdf52a39bb37",
+  measurementId: "G-M1GJX0VW9M"
 };
 
 firebase.initializeApp(firebaseConfig);
