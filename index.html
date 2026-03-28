@@ -7,7 +7,6 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-.hidden{display:none}
 
 body{
   font-family:'Poppins',sans-serif;
@@ -41,9 +40,7 @@ button{
   padding:25px;
   width:250px;
   cursor:pointer;
-  transition:0.3s;
 }
-.card:hover{transform:scale(1.05)}
 
 /* ITEMS */
 .item{
@@ -61,52 +58,36 @@ button{
   flex-wrap:wrap;
 }
 
-/* RANK BORDERS */
+/* RANK SPECIALS */
 .prime{border:1px solid #00ffcc;}
-.leorix{border:2px solid #00ffaa; transform:scale(1.08);}
+.leorix{border:2px solid #00ffaa; transform:scale(1.1);}
 .mythic{border:1px solid #ff00ff;}
 
-/* PERKS */
+/* PERKS FIX (VERTICAL) */
 .perks{
   margin-top:10px;
   padding:10px;
   background:rgba(255,255,255,0.05);
   border-radius:10px;
+
   display:flex;
   flex-direction:column;
   gap:6px;
+
   text-align:left;
   font-size:14px;
 }
 
-/* IMAGES */
-.kit-img,.coin-img{
+/* KIT IMAGE FIX */
+.kit-img{
   width:100%;
   border-radius:10px;
   margin-top:10px;
+  display:block;
 }
 
-/* ABOUT */
-.about-box{
-  width:80%;
-  max-width:600px;
-  margin:20px auto;
-  padding:25px;
-  text-align:left;
-  border:1px solid #00ffcc;
-  box-shadow:0 0 25px rgba(0,255,200,0.3);
-}
-.about-title{
-  font-size:24px;
-  color:#00ffcc;
-}
-.ip{
-  margin-top:15px;
-  padding:10px;
-  background:black;
-  border-radius:8px;
-  font-weight:bold;
-}
+/* ADDED */
+.hidden{display:none;}
 </style>
 </head>
 
@@ -115,14 +96,17 @@ button{
 <!-- MAIN -->
 <div id="main">
   <div class="card glass" onclick="show('survival')">Survival</div>
-  <div class="card glass" onclick="show('about')">About Server</div>
+  <button onclick="login()">Login</button>
 </div>
 
 <!-- SURVIVAL -->
 <div id="survival" class="hidden">
   <button onclick="show('main')">⬅ Back</button>
   <div class="card glass" onclick="show('ranks')">Ranks</div>
-  <div class="card glass" onclick="show('coinshop')">Coin Shop 🪙</div>
+
+  <!-- ADDED -->
+  <div class="card glass" onclick="show('coinshop')">Coin Shop</div>
+  <div class="card glass" onclick="show('about')">About</div>
 </div>
 
 <!-- RANKS -->
@@ -131,34 +115,58 @@ button{
 
 <div class="ranks-container">
 
+  <!-- PRIME -->
   <div class="item glass prime">
-    <img src="./prime.png">
+    <img src="./prime.png" style="width:100%;border-radius:10px;">
     <h3>Prime - ₹149</h3>
+
     <div class="perks">
-      <div>✔ /sit</div><div>✔ /ec</div><div>✔ /pv 1</div><div>✔ /home 3</div>
+      <div>✔ /sit</div>
+      <div>✔ /ec</div>
+      <div>✔ /pv 1</div>
+      <div>✔ /home 3</div>
     </div>
+
     <img src="./prime-kit.png" class="kit-img">
+    <h4>Prime Kit</h4>
   </div>
 
+  <!-- LEORIX+ -->
   <div class="item glass leorix">
-    <img src="./leorixplus.png">
+    <img src="./leorixplus.png" style="width:100%;border-radius:10px;">
     <h3>Leorix+ - ₹299</h3>
+
     <div class="perks">
-      <div>✔ /pv 1</div><div>✔ /ec</div><div>✔ /craft</div>
-      <div>✔ /anvil</div><div>✔ /grindstone</div><div>✔ /hat</div>
-      <div>✔ /sit</div><div>✔ /kit (7d)</div><div>✔ /home 7</div>
+      <div>✔ /pv 1</div>
+      <div>✔ /ec</div>
+      <div>✔ /craft</div>
+      <div>✔ /anvil</div>
+      <div>✔ /grindstone</div>
+      <div>✔ /hat</div>
+      <div>✔ /sit</div>
+      <div>✔ /kit (7 day cooldown)</div>
+      <div>✔ /home 7</div>
     </div>
+
     <img src="./leorix-kit.png" class="kit-img">
+    <h4>Leorix+ Kit</h4>
   </div>
 
+  <!-- MYTHIC -->
   <div class="item glass mythic">
-    <img src="./mythic.png">
+    <img src="./mythic.png" style="width:100%;border-radius:10px;">
     <h3>Mythic - ₹499</h3>
+
     <div class="perks">
-      <div>✔ /sit</div><div>✔ /ec</div><div>✔ /pv 1</div>
-      <div>✔ /anvil</div><div>✔ /home 5</div>
+      <div>✔ /sit</div>
+      <div>✔ /ec</div>
+      <div>✔ /pv 1</div>
+      <div>✔ /anvil</div>
+      <div>✔ /home 5</div>
     </div>
+
     <img src="./mythic-kit.png" class="kit-img">
+    <h4>Mythic Kit</h4>
   </div>
 
 </div>
@@ -166,43 +174,42 @@ button{
 
 <!-- COIN SHOP -->
 <div id="coinshop" class="hidden">
-<button onclick="show('survival')">⬅ Back</button>
+  <button onclick="show('survival')">⬅ Back</button>
 
-<div class="ranks-container">
-  <div class="item glass">
-    <img src="./coins1.png" class="coin-img">
-    <h3>100 Coins - ₹99</h3>
-    <button>Buy</button>
-  </div>
+  <div class="ranks-container">
+    <div class="item glass">
+      <img src="./100coins.png" style="width:100%;border-radius:10px;">
+      <h3>100 Coins - ₹49</h3>
+    </div>
 
-  <div class="item glass">
-    <img src="./coins2.png" class="coin-img">
-    <h3>500 Coins - ₹299</h3>
-    <button>Buy</button>
-  </div>
+    <div class="item glass">
+      <img src="./500coins.png" style="width:100%;border-radius:10px;">
+      <h3>500 Coins - ₹199</h3>
+    </div>
 
-  <div class="item glass">
-    <img src="./coins3.png" class="coin-img">
-    <h3>1000 Coins - ₹499</h3>
-    <button>Buy</button>
+    <div class="item glass">
+      <img src="./1000coins.png" style="width:100%;border-radius:10px;">
+      <h3>1000 Coins - ₹349</h3>
+    </div>
   </div>
-</div>
 </div>
 
 <!-- ABOUT -->
 <div id="about" class="hidden">
-<button onclick="show('main')">⬅ Back</button>
+  <button onclick="show('survival')">⬅ Back</button>
 
-<div class="about-box glass">
-  <div class="about-title">🚀 Leorix MC</div>
-  <p style="margin-top:10px;">
-    Custom survival server with ranks, economy, and events.
-  </p>
-  <p style="margin-top:10px;color:#aaa;">
-    ⚔ PvP • 🏆 Events • 💰 Economy • 🔥 Custom Kits
-  </p>
-  <div class="ip">IP: play.leorixmc.fun</div>
-</div>
+  <div class="card glass">
+    <h2>About Leorix SMP</h2>
+    <p style="margin-top:10px;line-height:1.6;">
+      Welcome to Leorix SMP — a premium survival experience built for fun,
+      grinding, and competitive gameplay.
+      <br><br>
+      Enjoy custom ranks, economy, coin shop, and exciting kits.
+      Play with friends, build your empire, and dominate the server!
+      <br><br>
+      IP: <b>play.leorixmc.fun</b>
+    </p>
+  </div>
 </div>
 
 <script>
@@ -213,20 +220,38 @@ function show(id){
 }
 </script>
 
-<!-- FIREBASE (YOUR CONFIG ADDED) -->
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyDaiP357SClEvOcQEm5Rz-X_9X1iXGrqic",
   authDomain: "leorixstore.firebaseapp.com",
-  projectId: "leorixstore",
-  storageBucket: "leorixstore.firebasestorage.app",
-  messagingSenderId: "313859928598",
-  appId: "1:313859928598:web:2c5e728431bdf52a39bb37",
-  measurementId: "G-M1GJX0VW9M"
+  projectId: "leorixstore"
 };
 
 firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+function login(){
+  const email = prompt("Enter Email");
+  const pass = prompt("Enter Password");
+
+  auth.signInWithEmailAndPassword(email, pass)
+  .then(()=> alert("Login Successful"))
+  .catch(err=> alert(err.message));
+}
+
+const adminEmail = "admin@gmail.com";
+
+auth.onAuthStateChanged(user=>{
+  if(user){
+    if(user.email === adminEmail){
+      console.log("Admin Logged In");
+    }
+  }
+});
 </script>
 
 </body>
