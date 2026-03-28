@@ -15,72 +15,97 @@ body{
   text-align:center;
 }
 
-/* GLASS */
+/* SECTIONS */
+.section{display:none;}
+.active{display:block;}
+
+/* GLASS UI */
 .glass{
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(8px);
-  border-radius:12px;
-  box-shadow:0 0 20px rgba(0,255,200,0.2);
+  background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(10px);
+  border-radius:15px;
+  box-shadow:0 0 25px rgba(0,255,200,0.2);
 }
 
 /* BUTTON */
 button{
   padding:10px 15px;
-  margin:5px;
+  margin-top:10px;
   border:none;
   border-radius:8px;
   background:linear-gradient(45deg,#00ffcc,#00cc99);
   color:black;
   cursor:pointer;
+  font-weight:600;
 }
 
 /* CARDS */
 .card{
   margin:20px auto;
   padding:25px;
-  width:250px;
-  cursor:pointer;
-}
-
-/* ITEMS */
-.item{
-  margin:20px auto;
-  padding:15px;
   width:260px;
-}
-
-/* FLEX */
-.ranks-container{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  flex-wrap:wrap;
+  cursor:pointer;
 }
 
 /* PROFILE */
 #profile{
-  position:fixed;
-  top:15px;
+  position:absolute;
+  top:20px;
   right:20px;
-  font-size:26px;
-  cursor:pointer;
+  font-size:18px;
+  padding:8px 12px;
 }
 
-/* COINS */
-.coin-box{
-  width:280px;
+/* COIN SHOP */
+.coin-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:30px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.coin{
+  width:260px;
   padding:20px;
+  transition:0.3s;
 }
 
-.coin-box img{
+.coin:hover{transform:scale(1.05);}
+
+/* CENTER BIG BOX */
+.featured{
+  transform:scale(1.2);
+  border:2px solid gold;
+}
+
+/* CART */
+#cartBox{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:15px;
+  width:260px;
+  display:none;
+}
+
+/* LOGIN BOX */
+#loginBox{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  padding:20px;
+  width:300px;
+}
+
+input{
   width:100%;
-  border-radius:12px;
-}
-
-.price{
-  font-size:28px;
-  margin:10px 0;
-  color:#00ffcc;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
 }
 </style>
 </head>
@@ -88,113 +113,133 @@ button{
 <body>
 
 <!-- MAIN -->
-<div id="main">
-  <div id="profile" onclick="toggleLogin()">👤</div>
+<div id="main" class="section active">
+  <div id="profile" class="glass" onclick="show('login')">Login</div>
 
   <div class="card glass" onclick="show('survival')">Survival</div>
   <div class="card glass" onclick="show('about')">About</div>
 </div>
 
+<!-- LOGIN -->
+<div id="login" class="section">
+  <div id="loginBox" class="glass">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <button onclick="show('main')">Back</button>
+  </div>
+</div>
+
 <!-- SURVIVAL -->
-<div id="survival">
+<div id="survival" class="section">
   <button onclick="show('main')">⬅ Back</button>
-  <div class="card glass" onclick="show('ranks')">Ranks</div>
   <div class="card glass" onclick="show('coinshop')">Coin Shop</div>
 </div>
 
-<!-- RANKS -->
-<div id="ranks">
-<button onclick="show('survival')">⬅ Back</button>
-
-<div class="ranks-container">
-  <div class="item glass">
-    <h3>Prime - ₹149</h3>
-  </div>
-
-  <div class="item glass">
-    <h3>Leorix+ - ₹299</h3>
-  </div>
-
-  <div class="item glass">
-    <h3>Mythic - ₹499</h3>
-  </div>
-</div>
-</div>
-
 <!-- COIN SHOP -->
-<div id="coinshop">
+<div id="coinshop" class="section">
   <button onclick="show('survival')">⬅ Back</button>
 
-  <div class="ranks-container">
+  <div class="coin-container">
 
-    <div class="item glass coin-box">
-      <img src="./100coins.png">
-      <h2>100 Coins</h2>
-      <h1 class="price">₹49</h1>
-      <button>Buy</button>
+    <div class="coin glass">
+      <h3>100 Coins</h3>
+      <h2>₹49</h2>
+      <button onclick="addToCart('100 Coins',49)">Buy</button>
     </div>
 
-    <div class="item glass coin-box">
-      <img src="./500coins.png">
-      <h2>500 Coins</h2>
-      <h1 class="price">₹199</h1>
-      <button>Buy</button>
+    <div class="coin glass featured">
+      <h3>1000 Coins</h3>
+      <h1>₹349</h1>
+      <button onclick="addToCart('1000 Coins',349)">Buy</button>
     </div>
 
-    <div class="item glass coin-box">
-      <img src="./1000coins.png">
-      <h2>1000 Coins</h2>
-      <h1 class="price">₹349</h1>
-      <button>Buy</button>
+    <div class="coin glass">
+      <h3>500 Coins</h3>
+      <h2>₹199</h2>
+      <button onclick="addToCart('500 Coins',199)">Buy</button>
     </div>
 
   </div>
 </div>
 
 <!-- ABOUT -->
-<div id="about">
+<div id="about" class="section">
   <button onclick="show('main')">⬅ Back</button>
 
   <div class="card glass">
-    <h2>About Leorix SMP</h2>
+    <h2>Leorix SMP</h2>
     <p>
-      Welcome to Leorix SMP — a fun survival server with ranks,
-      economy and coin shop.
-      <br><br>
+      Best survival server ⚔️<br><br>
       IP: <b>play.leorixmc.fun</b>
     </p>
   </div>
 </div>
 
-<!-- LOGIN -->
-<div id="loginBox" class="glass" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;">
-  <input id="email" placeholder="Email"><br>
-  <input id="pass" type="password" placeholder="Password"><br>
-  <button onclick="login()">Login</button>
+<!-- CART -->
+<div id="cartBox" class="glass">
+  <h3>Cart</h3>
+  <div id="cartItems"></div>
+  <h4 id="total">₹0</h4>
 </div>
 
+<!-- NAVIGATION -->
 <script>
 function show(id){
-  document.getElementById("main").style.display="none";
-  document.getElementById("survival").style.display="none";
-  document.getElementById("ranks").style.display="none";
-  document.getElementById("coinshop").style.display="none";
-  document.getElementById("about").style.display="none";
-
-  document.getElementById(id).style.display="block";
+  document.querySelectorAll(".section").forEach(sec=>{
+    sec.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
 }
+</script>
 
-// DEFAULT PAGE
-show("main");
-
-// LOGIN UI
-function toggleLogin(){
-  let box=document.getElementById("loginBox");
-  box.style.display = box.style.display==="none"?"block":"none";
-}
-
+<!-- LOGIN SYSTEM (REAL FRONTEND) -->
+<script>
 function login(){
-  alert("Login working (Firebase optional)");
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+
+  if(email && pass){
+    localStorage.setItem("user", email);
+    document.getElementById("profile").innerText = email;
+    alert("Logged in!");
+    show('main');
+  } else {
+    alert("Enter details");
+  }
+}
+
+/* auto login */
+window.onload = ()=>{
+  const user = localStorage.getItem("user");
+  if(user){
+    document.getElementById("profile").innerText = user;
+  }
+}
+</script>
+
+<!-- CART -->
+<script>
+let cart = [];
+
+function addToCart(name, price){
+  cart.push({name, price});
+  updateCart();
+  document.getElementById("cartBox").style.display="block";
+}
+
+function updateCart(){
+  let total = 0;
+  let html = "";
+
+  cart.forEach(i=>{
+    html += `<div>${i.name} - ₹${i.price}</div>`;
+    total += i.price;
+  });
+
+  document.getElementById("cartItems").innerHTML = html;
+  document.getElementById("total").innerText = "₹"+total;
 }
 </script>
 
