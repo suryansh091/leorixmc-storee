@@ -15,6 +15,11 @@ body{
   text-align:center;
 }
 
+/* IMPORTANT FIX */
+.hidden{
+  display:none !important;
+}
+
 /* GLASS */
 .glass{
   background:rgba(0,0,0,0.6);
@@ -63,31 +68,25 @@ button{
 .leorix{border:2px solid #00ffaa; transform:scale(1.1);}
 .mythic{border:1px solid #ff00ff;}
 
-/* PERKS FIX (VERTICAL) */
+/* PERKS */
 .perks{
   margin-top:10px;
   padding:10px;
   background:rgba(255,255,255,0.05);
   border-radius:10px;
-
   display:flex;
   flex-direction:column;
   gap:6px;
-
   text-align:left;
   font-size:14px;
 }
 
-/* KIT IMAGE FIX */
+/* KIT IMAGE */
 .kit-img{
   width:100%;
   border-radius:10px;
   margin-top:10px;
-  display:block;
 }
-
-/* ADDED */
-.hidden{display:none;}
 </style>
 </head>
 
@@ -103,8 +102,6 @@ button{
 <div id="survival" class="hidden">
   <button onclick="show('main')">⬅ Back</button>
   <div class="card glass" onclick="show('ranks')">Ranks</div>
-
-  <!-- ADDED -->
   <div class="card glass" onclick="show('coinshop')">Coin Shop</div>
   <div class="card glass" onclick="show('about')">About</div>
 </div>
@@ -115,27 +112,22 @@ button{
 
 <div class="ranks-container">
 
-  <!-- PRIME -->
   <div class="item glass prime">
     <img src="./prime.png" style="width:100%;border-radius:10px;">
     <h3>Prime - ₹149</h3>
-
     <div class="perks">
       <div>✔ /sit</div>
       <div>✔ /ec</div>
       <div>✔ /pv 1</div>
       <div>✔ /home 3</div>
     </div>
-
     <img src="./prime-kit.png" class="kit-img">
     <h4>Prime Kit</h4>
   </div>
 
-  <!-- LEORIX+ -->
   <div class="item glass leorix">
     <img src="./leorixplus.png" style="width:100%;border-radius:10px;">
     <h3>Leorix+ - ₹299</h3>
-
     <div class="perks">
       <div>✔ /pv 1</div>
       <div>✔ /ec</div>
@@ -147,16 +139,13 @@ button{
       <div>✔ /kit (7 day cooldown)</div>
       <div>✔ /home 7</div>
     </div>
-
     <img src="./leorix-kit.png" class="kit-img">
     <h4>Leorix+ Kit</h4>
   </div>
 
-  <!-- MYTHIC -->
   <div class="item glass mythic">
     <img src="./mythic.png" style="width:100%;border-radius:10px;">
     <h3>Mythic - ₹499</h3>
-
     <div class="perks">
       <div>✔ /sit</div>
       <div>✔ /ec</div>
@@ -164,7 +153,6 @@ button{
       <div>✔ /anvil</div>
       <div>✔ /home 5</div>
     </div>
-
     <img src="./mythic-kit.png" class="kit-img">
     <h4>Mythic Kit</h4>
   </div>
@@ -205,18 +193,20 @@ button{
       grinding, and competitive gameplay.
       <br><br>
       Enjoy custom ranks, economy, coin shop, and exciting kits.
-      Play with friends, build your empire, and dominate the server!
       <br><br>
       IP: <b>play.leorixmc.fun</b>
     </p>
   </div>
 </div>
 
+<!-- STRONG JS FIX -->
 <script>
 function show(id){
-  document.querySelectorAll("#main,#survival,#ranks,#coinshop,#about")
-  .forEach(e=>e.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
+  const sections = ["main","survival","ranks","coinshop","about"];
+  sections.forEach(sec=>{
+    document.getElementById(sec).style.display = "none";
+  });
+  document.getElementById(id).style.display = "block";
 }
 </script>
 
@@ -246,10 +236,8 @@ function login(){
 const adminEmail = "admin@gmail.com";
 
 auth.onAuthStateChanged(user=>{
-  if(user){
-    if(user.email === adminEmail){
-      console.log("Admin Logged In");
-    }
+  if(user && user.email === adminEmail){
+    console.log("Admin Logged In");
   }
 });
 </script>
