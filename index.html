@@ -76,7 +76,7 @@ button{
   font-size:14px;
 }
 
-/* KIT IMAGE */
+/* KIT */
 .kit-img{
   width:100%;
   border-radius:10px;
@@ -89,29 +89,62 @@ button{
   border:1px solid gold;
 }
 
+/* MIDDLE COIN */
+.middle{
+  transform:scale(1.1);
+  border:2px solid gold;
+}
+
 /* ABOUT */
 .about-box{
-  max-width:650px;
+  max-width:700px;
   margin:30px auto;
   padding:25px;
   font-size:15px;
   line-height:1.8;
   text-align:left;
 }
+
 .server-ip{
-  margin-top:10px;
-  padding:10px;
+  margin-top:20px;
+  padding:15px;
   background:rgba(0,255,204,0.1);
   border:1px solid #00ffcc;
   border-radius:10px;
   text-align:center;
   font-weight:bold;
+  font-size:18px;
   color:#00ffcc;
+}
+
+/* LOGIN FIX (OUTSIDE FLOW) */
+#loginBox{
+  position:fixed;
+  top:15px;
+  right:15px;
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+  z-index:999;
+}
+
+input{
+  padding:8px;
+  margin:5px;
+  width:180px;
 }
 </style>
 </head>
 
 <body>
+
+<!-- LOGIN (fixed separate) -->
+<div id="loginBox">
+<h4>Login</h4>
+<input placeholder="Email"><br>
+<input type="password" placeholder="Password"><br>
+<button>Login</button>
+</div>
 
 <!-- MAIN -->
 <div id="main">
@@ -121,12 +154,10 @@ button{
 
 <!-- SURVIVAL -->
 <div id="survival" class="hidden">
+  <button onclick="show('main')">⬅ Back</button>
 
-<button onclick="show('main')">⬅ Back</button>
-
-<div class="card glass" onclick="show('ranks')">Ranks</div>
-<div class="card glass" onclick="show('coins')">Coins Shop</div>
-
+  <div class="card glass" onclick="show('ranks')">Ranks</div>
+  <div class="card glass" onclick="show('coins')">Coins Shop</div>
 </div>
 
 <!-- RANKS -->
@@ -188,7 +219,7 @@ button{
 </div>
 </div>
 
-<!-- COINS -->
+<!-- COINS SHOP FIXED -->
 <div id="coins" class="hidden">
 <button onclick="show('survival')">⬅ Back</button>
 
@@ -199,7 +230,7 @@ button{
     <h3>1,000 Coins - ₹49</h3>
   </div>
 
-  <div class="item glass coin" style="transform:scale(1.1);border:2px solid gold;">
+  <div class="item glass coin middle">
     <img src="./coins2.png" style="width:100%;border-radius:10px;">
     <h3>5,000 Coins - ₹149</h3>
   </div>
@@ -212,37 +243,38 @@ button{
 </div>
 </div>
 
-<!-- ABOUT -->
+<!-- ABOUT (VERY ATTRACTIVE) -->
 <div id="about" class="hidden">
 <button onclick="show('main')">⬅ Back</button>
 
 <div class="about-box glass">
 
-<h2>🌟 About LeorixMC Store</h2>
+<h2>🌟 Welcome to LeorixMC</h2>
 
 <p>
-Welcome to <b>LeorixMC Store</b> – your ultimate Minecraft survival shop where you can upgrade your gameplay with exclusive ranks, powerful kits, and premium coin packages.
+Step into a next-level Minecraft survival experience where every player has equal opportunity to grow, fight, and dominate.
 </p>
 
 <p>
-We focus on fair survival balance, high-quality rewards, and a smooth player experience that keeps the game fun and competitive.
+⚔ Our server is built for fairness, competition, and fun. Whether you are a starter or a pro, there is always something powerful waiting for you.
 </p>
 
 <p>
-🔥 Why choose us?
+🔥 Features:
 - Balanced survival economy  
-- Exclusive donor perks  
-- Custom kits & rewards  
-- Clean and fair gameplay system  
-- Premium server experience  
+- Exclusive ranks & kits  
+- Fair PvP system  
+- Active community  
+- Smooth gameplay performance  
 </p>
 
 <p>
-💎 Join the adventure, upgrade your power, and become a legend on our server!
+💎 Why LeorixMC?
+Because we don’t just sell ranks — we create an experience where every upgrade actually matters.
 </p>
 
 <div class="server-ip">
-Server IP: play.leorixmc.fun
+🚀 Server IP: play.leorixmc.fun
 </div>
 
 </div>
