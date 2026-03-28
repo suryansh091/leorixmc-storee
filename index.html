@@ -10,7 +10,7 @@
 
 body{
   font-family:'Poppins',sans-serif;
-  background:url('background.png') no-repeat center/cover fixed;
+  background:#0f172a;
   color:white;
   text-align:center;
 }
@@ -72,19 +72,13 @@ button{
   padding:15px;
   border-radius:12px;
   background:rgba(0,0,0,0.7);
-  transition:0.3s;
 }
-.rank-box:hover{transform:scale(1.05)}
 
 .rank-img{
   width:100%;
   height:80px;
   object-fit:contain;
 }
-
-.leorix{border:2px solid #00ffaa;}
-.prime{border:1px solid #00ffcc;}
-.mythic{border:1px solid #ff00ff;}
 
 .perks{
   text-align:left;
@@ -110,13 +104,10 @@ button{
 .coin{
   width:260px;
   padding:25px;
-  transition:0.3s;
 }
-.coin:hover{transform:scale(1.08)}
 
 .coin img{
   width:120px;
-  margin-bottom:10px;
 }
 
 .featured{
@@ -188,25 +179,37 @@ input{
 
 <div class="ranks-container">
 
-  <div class="rank-box prime">
-    <img src="prime.png" class="rank-img">
+  <div class="rank-box">
+    <img class="rank-img"
+    src="prime.png"
+    onerror="this.src='https://via.placeholder.com/300x80?text=Prime'">
     <h3>Prime - ₹149</h3>
-    <div class="perks">✔ /sit ✔ /ec ✔ /pv 1 ✔ /home 3</div>
-    <img src="prime-kit.png" class="kit-img">
+    <div class="perks">✔ /sit ✔ /ec ✔ /pv ✔ /home 3</div>
+    <img class="kit-img"
+    src="prime-kit.png"
+    onerror="this.src='https://via.placeholder.com/300x150?text=Prime+Kit'">
   </div>
 
-  <div class="rank-box leorix">
-    <img src="leorixplus.png" class="rank-img">
+  <div class="rank-box">
+    <img class="rank-img"
+    src="leorixplus.png"
+    onerror="this.src='https://via.placeholder.com/300x80?text=Leorix+'">
     <h3>Leorix+ - ₹299</h3>
     <div class="perks">✔ /pv ✔ /ec ✔ /craft ✔ /anvil ✔ /hat ✔ /kit ✔ /home 7</div>
-    <img src="leorix-kit.png" class="kit-img">
+    <img class="kit-img"
+    src="leorix-kit.png"
+    onerror="this.src='https://via.placeholder.com/300x150?text=Leorix+Kit'">
   </div>
 
-  <div class="rank-box mythic">
-    <img src="mythic.png" class="rank-img">
+  <div class="rank-box">
+    <img class="rank-img"
+    src="mythic.png"
+    onerror="this.src='https://via.placeholder.com/300x80?text=Mythic'">
     <h3>Mythic - ₹499</h3>
     <div class="perks">✔ /sit ✔ /ec ✔ /pv ✔ /anvil ✔ /home 5</div>
-    <img src="mythic-kit.png" class="kit-img">
+    <img class="kit-img"
+    src="mythic-kit.png"
+    onerror="this.src='https://via.placeholder.com/300x150?text=Mythic+Kit'">
   </div>
 
 </div>
@@ -219,21 +222,24 @@ input{
 <div class="coin-container">
 
   <div class="coin glass">
-    <img src="100coins.png">
+    <img src="100coins.png"
+    onerror="this.src='https://via.placeholder.com/150?text=100+Coins'">
     <h3>100 Coins</h3>
     <h2>₹49</h2>
     <button onclick="addToCart('100 Coins',49)">Buy</button>
   </div>
 
   <div class="coin glass featured">
-    <img src="1000coins.png">
+    <img src="1000coins.png"
+    onerror="this.src='https://via.placeholder.com/150?text=1000+Coins'">
     <h2>1000 Coins</h2>
     <h1>₹349</h1>
     <button onclick="addToCart('1000 Coins',349)">Buy</button>
   </div>
 
   <div class="coin glass">
-    <img src="500coins.png">
+    <img src="500coins.png"
+    onerror="this.src='https://via.placeholder.com/150?text=500+Coins'">
     <h3>500 Coins</h3>
     <h2>₹199</h2>
     <button onclick="addToCart('500 Coins',199)">Buy</button>
