@@ -15,7 +15,7 @@ body{
   text-align:center;
 }
 
-/* FIXED SECTION SYSTEM */
+/* SECTIONS */
 .section{display:none;}
 .section.active{display:block;}
 
@@ -39,6 +39,16 @@ button{
   font-weight:600;
 }
 
+/* PROFILE */
+#profile{
+  position:absolute;
+  top:20px;
+  right:20px;
+  padding:10px 15px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
 /* CARDS */
 .card{
   margin:20px auto;
@@ -47,30 +57,26 @@ button{
   cursor:pointer;
 }
 
-/* PROFILE */
-#profile{
-  position:absolute;
-  top:20px;
-  right:20px;
-  padding:10px 15px;
-  cursor:pointer;
-  border-radius:20px;
-}
-
 /* RANKS */
 .ranks-container{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:20px;
+  gap:25px;
   margin-top:20px;
 }
 
 .rank-box{
-  width:260px;
+  width:270px;
   padding:15px;
-  background:rgba(0,0,0,0.7);
   border-radius:12px;
+  background:rgba(0,0,0,0.7);
+}
+
+.rank-box img.rank-img{
+  width:100%;
+  border-radius:10px;
+  margin-bottom:10px;
 }
 
 .leorix{border:2px solid #00ffaa; transform:scale(1.05);}
@@ -101,7 +107,12 @@ button{
 
 .coin{
   width:260px;
-  padding:25px;
+  padding:20px;
+}
+
+.coin img{
+  width:120px;
+  margin-bottom:10px;
 }
 
 .featured{
@@ -145,8 +156,8 @@ input{
 <div id="main" class="section active">
   <div id="profile" class="glass" onclick="show('login')">👤 Login</div>
 
-  <div class="card glass" onclick="show('survival')">Survival</div>
-  <div class="card glass" onclick="show('about')">About</div>
+  <div class="card glass" onclick="show('survival')">🎮 Survival</div>
+  <div class="card glass" onclick="show('about')">ℹ️ About</div>
 </div>
 
 <!-- LOGIN -->
@@ -175,13 +186,13 @@ input{
 
   <!-- PRIME -->
   <div class="rank-box prime">
+    <img src="prime.png" class="rank-img"
+    onerror="this.src='https://via.placeholder.com/300x120?text=Prime'">
+
     <h3>Prime - ₹149</h3>
 
     <div class="perks">
-      ✔ /sit<br>
-      ✔ /ec<br>
-      ✔ /pv 1<br>
-      ✔ /home 3
+      ✔ /sit<br>✔ /ec<br>✔ /pv 1<br>✔ /home 3
     </div>
 
     <h4>Prime Kit</h4>
@@ -191,18 +202,15 @@ input{
 
   <!-- LEORIX -->
   <div class="rank-box leorix">
+    <img src="leorixplus.png" class="rank-img"
+    onerror="this.src='https://via.placeholder.com/300x120?text=Leorix+'">
+
     <h3>Leorix+ - ₹299</h3>
 
     <div class="perks">
-      ✔ /pv 1<br>
-      ✔ /ec<br>
-      ✔ /craft<br>
-      ✔ /anvil<br>
-      ✔ /grindstone<br>
-      ✔ /hat<br>
-      ✔ /sit<br>
-      ✔ /kit<br>
-      ✔ /home 7
+      ✔ /pv 1<br>✔ /ec<br>✔ /craft<br>✔ /anvil<br>
+      ✔ /grindstone<br>✔ /hat<br>✔ /sit<br>
+      ✔ /kit<br>✔ /home 7
     </div>
 
     <h4>Leorix+ Kit</h4>
@@ -212,14 +220,13 @@ input{
 
   <!-- MYTHIC -->
   <div class="rank-box mythic">
+    <img src="mythic.png" class="rank-img"
+    onerror="this.src='https://via.placeholder.com/300x120?text=Mythic'">
+
     <h3>Mythic - ₹499</h3>
 
     <div class="perks">
-      ✔ /sit<br>
-      ✔ /ec<br>
-      ✔ /pv 1<br>
-      ✔ /anvil<br>
-      ✔ /home 5
+      ✔ /sit<br>✔ /ec<br>✔ /pv 1<br>✔ /anvil<br>✔ /home 5
     </div>
 
     <h4>Mythic Kit</h4>
@@ -237,18 +244,24 @@ input{
 <div class="coin-container">
 
   <div class="coin glass">
+    <img src="100coins.png"
+    onerror="this.src='https://via.placeholder.com/120?text=100'">
     <h3>100 Coins</h3>
     <h2>₹49</h2>
     <button onclick="addToCart('100 Coins',49)">Buy</button>
   </div>
 
   <div class="coin glass featured">
+    <img src="1000coins.png"
+    onerror="this.src='https://via.placeholder.com/120?text=1000'">
     <h3>1000 Coins</h3>
     <h1>₹349</h1>
     <button onclick="addToCart('1000 Coins',349)">Buy</button>
   </div>
 
   <div class="coin glass">
+    <img src="500coins.png"
+    onerror="this.src='https://via.placeholder.com/120?text=500'">
     <h3>500 Coins</h3>
     <h2>₹199</h2>
     <button onclick="addToCart('500 Coins',199)">Buy</button>
@@ -283,7 +296,6 @@ function show(id){
   document.getElementById(id).classList.add("active");
 }
 
-// LOGIN
 function login(){
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
@@ -305,7 +317,6 @@ window.onload = ()=>{
   }
 }
 
-// CART
 let cart = [];
 
 function addToCart(name, price){
