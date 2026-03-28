@@ -1,40 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Leorix MC Store</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:url('background.png') no-repeat center/cover fixed;
+  color:white;
+  text-align:center;
+}
+
+/* GLASS */
+.glass{
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(8px);
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,255,200,0.2);
+}
+
+/* BUTTON */
+button{
+  padding:10px 15px;
+  margin:5px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(45deg,#00ffcc,#00cc99);
+  color:black;
+  cursor:pointer;
+}
+
+/* CARDS */
+.card{
+  margin:20px auto;
+  padding:25px;
+  width:250px;
+  cursor:pointer;
+}
+
+/* ITEMS */
+.item{
+  margin:20px auto;
+  padding:15px;
+  width:260px;
+}
+
+/* RANK LAYOUT */
+.ranks-container{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+/* RANK SPECIALS */
+.prime{border:1px solid #00ffcc;}
+.leorix{border:2px solid #00ffaa; transform:scale(1.1);}
+.mythic{border:1px solid #ff00ff;}
+
+/* PERKS FIX (VERTICAL) */
+.perks{
+  margin-top:10px;
+  padding:10px;
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
+
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+
+  text-align:left;
+  font-size:14px;
+}
+
+/* KIT IMAGE FIX */
+.kit-img{
+  width:100%;
+  border-radius:10px;
+  margin-top:10px;
+  display:block;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MAIN -->
+<div id="main">
+  <div class="card glass" onclick="show('survival')">Survival</div>
+</div>
+
+<!-- SURVIVAL -->
+<div id="survival" class="hidden">
+  <button onclick="show('main')">⬅ Back</button>
+  <div class="card glass" onclick="show('ranks')">Ranks</div>
+</div>
+
+<!-- RANKS -->
+<div id="ranks" class="hidden">
+<button onclick="show('survival')">⬅ Back</button>
+
+<div class="ranks-container">
+
+  <!-- PRIME -->
+  <div class="item glass prime">
+    <img src="./prime.png" style="width:100%;border-radius:10px;">
+    <h3>Prime - ₹149</h3>
 
     <div class="perks">
-      ✔ /sit<br>
-      ✔ /ec<br>
-      ✔ /pv 1<br>
-      ✔ /anvil<br>
-      ✔ /home 5
+      <div>✔ /sit</div>
+      <div>✔ /ec</div>
+      <div>✔ /pv 1</div>
+      <div>✔ /home 3</div>
     </div>
 
-    <img src="./mythic-kit.png" style="width:100%;border-radius:10px;margin-top:10px;">
+    <img src="./prime-kit.png" class="kit-img">
+    <h4>Prime Kit</h4>
+  </div>
+
+  <!-- LEORIX+ -->
+  <div class="item glass leorix">
+    <img src="./leorixplus.png" style="width:100%;border-radius:10px;">
+    <h3>Leorix+ - ₹299</h3>
+
+    <div class="perks">
+      <div>✔ /pv 1</div>
+      <div>✔ /ec</div>
+      <div>✔ /craft</div>
+      <div>✔ /anvil</div>
+      <div>✔ /grindstone</div>
+      <div>✔ /hat</div>
+      <div>✔ /sit</div>
+      <div>✔ /kit (7 day cooldown)</div>
+      <div>✔ /home 7</div>
+    </div>
+
+    <img src="./leorix-kit.png" class="kit-img">
+    <h4>Leorix+ Kit</h4>
+  </div>
+
+  <!-- MYTHIC -->
+  <div class="item glass mythic">
+    <img src="./mythic.png" style="width:100%;border-radius:10px;">
+    <h3>Mythic - ₹499</h3>
+
+    <div class="perks">
+      <div>✔ /sit</div>
+      <div>✔ /ec</div>
+      <div>✔ /pv 1</div>
+      <div>✔ /anvil</div>
+      <div>✔ /home 5</div>
+    </div>
+
+    <img src="./mythic-kit.png" class="kit-img">
     <h4>Mythic Kit</h4>
   </div>
 
 </div>
 </div>
 
-<!-- ABOUT -->
-<div id="about" class="hidden">
-<button onclick="show('main')">⬅ Back</button>
-<div class="about-box glass">play.leorixmc.fun</div>
-</div>
-
-<!-- SCRIPT -->
 <script>
 function show(id){
-  document.querySelectorAll("#main,#survival,#ranks,#about")
+  document.querySelectorAll("#main,#survival,#ranks")
   .forEach(e=>e.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
-}
-
-function toggleLogin(){
-  document.getElementById("loginBox").classList.toggle("hidden");
-}
-
-function toggleEmail(){
-  document.getElementById("emailBox").classList.toggle("hidden");
 }
 </script>
 
