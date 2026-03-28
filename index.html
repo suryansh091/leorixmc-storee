@@ -77,13 +77,32 @@ button{
   margin-top:10px;
 }
 
-/* PROFILE ICON */
+/* PROFILE */
 #profile{
-  position:absolute;
-  top:20px;
+  position:fixed;
+  top:15px;
   right:20px;
-  font-size:22px;
+  font-size:26px;
   cursor:pointer;
+  z-index:999;
+}
+
+/* COIN BOX IMPROVED */
+.coin-box{
+  width:280px;
+  padding:20px;
+  text-align:center;
+}
+
+.coin-box img{
+  width:100%;
+  border-radius:12px;
+}
+
+.price{
+  font-size:28px;
+  margin:10px 0;
+  color:#00ffcc;
 }
 </style>
 </head>
@@ -92,7 +111,7 @@ button{
 
 <!-- MAIN -->
 <div id="main">
-  <div id="profile" onclick="login()">👤</div>
+  <div id="profile" onclick="toggleLogin()">👤</div>
 
   <div class="card glass" onclick="show('survival')">Survival</div>
   <div class="card glass" onclick="show('about')">About</div>
@@ -164,23 +183,28 @@ button{
   <button onclick="show('survival')">⬅ Back</button>
 
   <div class="ranks-container">
-    <div class="item glass">
-      <img src="./100coins.png" style="width:100%;border-radius:10px;">
-      <h3>100 Coins - ₹49</h3>
+
+    <div class="item glass coin-box">
+      <img src="./100coins.png">
+      <h2>100 Coins</h2>
+      <h1 class="price">₹49</h1>
       <button onclick="addToCart('100 Coins',49)">Buy</button>
     </div>
 
-    <div class="item glass">
-      <img src="./500coins.png" style="width:100%;border-radius:10px;">
-      <h3>500 Coins - ₹199</h3>
+    <div class="item glass coin-box">
+      <img src="./500coins.png">
+      <h2>500 Coins</h2>
+      <h1 class="price">₹199</h1>
       <button onclick="addToCart('500 Coins',199)">Buy</button>
     </div>
 
-    <div class="item glass">
-      <img src="./1000coins.png" style="width:100%;border-radius:10px;">
-      <h3>1000 Coins - ₹349</h3>
+    <div class="item glass coin-box">
+      <img src="./1000coins.png">
+      <h2>1000 Coins</h2>
+      <h1 class="price">₹349</h1>
       <button onclick="addToCart('1000 Coins',349)">Buy</button>
     </div>
+
   </div>
 </div>
 
@@ -201,15 +225,14 @@ button{
   </div>
 </div>
 
-<!-- CART -->
-<div id="cartBox" class="glass hidden" style="position:fixed;bottom:20px;right:20px;padding:15px;width:250px;">
-  <h3>Cart</h3>
-  <div id="cartItems"></div>
-  <h4 id="total">Total: ₹0</h4>
-  <button onclick="checkout()">Checkout</button>
+<!-- LOGIN BOX -->
+<div id="loginBox" class="glass hidden" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;width:280px;z-index:1000;">
+  <h3>Login</h3>
+  <input id="email" placeholder="Email" style="width:100%;margin:5px;padding:8px;">
+  <input id="pass" type="password" placeholder="Password" style="width:100%;margin:5px;padding:8px;">
+  <button onclick="login()">Login</button>
 </div>
 
-<!-- NAVIGATION -->
 <script>
 function show(id){
   const sections = ["main","survival","ranks","coinshop","about"];
@@ -220,35 +243,15 @@ function show(id){
 }
 </script>
 
-<!-- CART SYSTEM -->
 <script>
-let cart = [];
-
-function addToCart(name, price){
-  cart.push({name, price});
-  updateCart();
-  document.getElementById("cartBox").classList.remove("hidden");
-}
-
-function updateCart(){
-  let html = "";
-  let total = 0;
-
-  cart.forEach(item=>{
-    html += `<div>${item.name} - ₹${item.price}</div>`;
-    total += item.price;
-  });
-
-  document.getElementById("cartItems").innerHTML = html;
-  document.getElementById("total").innerText = "Total: ₹" + total;
-}
-
-function checkout(){
-  alert("Payment system coming next 😎");
+let cart=[];
+function addToCart(name,price){
+  cart.push({name,price});
+  alert(name+" added to cart");
 }
 </script>
 
-<!-- FIREBASE LOGIN (FIXED) -->
+<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -262,21 +265,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-window.login = function(){
-  const email = prompt("Enter Email");
-  const pass = prompt("Enter Password");
-
-  signInWithEmailAndPassword(auth, email, pass)
-  .then(()=>{
-    document.getElementById("profile").innerText = "🟢";
-    alert("Logged in!");
-  })
-  .catch(err=> alert(err.message));
+window.toggleLogin=function(){
+  document.getElementById("loginBox").classList.toggle("hidden");
 }
 
-onAuthStateChanged(auth, user=>{
+window.login=function(){
+  const email=document.getElementById("email").value;
+  const pass=document.getElementById("pass").value;
+
+  signInWithEmailAndPassword(auth,email,pass)
+  .then(()=>{
+    document.getElementById("profile").innerText="🟢";
+    document.getElementById("loginBox").classList.add("hidden");
+  })
+  .catch(err=>alert(err.message));
+}
+
+onAuthStateChanged(auth,user=>{
   if(user){
-    document.getElementById("profile").innerText = "🟢";
+    document.getElementById("profile").innerText="🟢";
   }
 });
 </script>
