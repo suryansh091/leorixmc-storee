@@ -42,8 +42,8 @@ button{
 /* CARDS */
 .card{
   margin:20px auto;
-  padding:25px;
-  width:260px;
+  padding:30px;
+  width:280px;
   cursor:pointer;
 }
 
@@ -52,43 +52,22 @@ button{
   position:absolute;
   top:20px;
   right:20px;
-  padding:8px 12px;
+  padding:10px 15px;
   cursor:pointer;
-}
-
-/* COIN SHOP */
-.coin-container{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:30px;
-  flex-wrap:wrap;
-  margin-top:20px;
-}
-
-.coin{
-  width:260px;
-  padding:20px;
-  transition:0.3s;
-}
-
-.coin:hover{transform:scale(1.05);}
-
-.featured{
-  transform:scale(1.2);
-  border:2px solid gold;
+  border-radius:20px;
 }
 
 /* RANKS */
 .ranks-container{
   display:flex;
   justify-content:center;
-  gap:20px;
+  gap:25px;
   flex-wrap:wrap;
+  margin-top:20px;
 }
 
 .item{
-  width:260px;
+  width:270px;
   padding:15px;
 }
 
@@ -99,16 +78,39 @@ button{
 .perks{
   margin-top:10px;
   padding:10px;
-  background:rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.08);
   border-radius:10px;
   text-align:left;
   font-size:14px;
+  line-height:1.6;
 }
 
+/* KIT IMAGE */
 .kit-img{
   width:100%;
   border-radius:10px;
   margin-top:10px;
+  min-height:120px;
+  object-fit:cover;
+}
+
+/* COIN SHOP */
+.coin-container{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+.coin{
+  width:260px;
+  padding:25px;
+}
+
+.featured{
+  transform:scale(1.3);
+  border:2px solid gold;
 }
 
 /* CART */
@@ -127,7 +129,7 @@ button{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  padding:20px;
+  padding:25px;
   width:300px;
 }
 
@@ -145,7 +147,7 @@ input{
 
 <!-- MAIN -->
 <div id="main" class="section active">
-  <div id="profile" class="glass" onclick="show('login')">Login</div>
+  <div id="profile" class="glass" onclick="show('login')">👤 Login</div>
 
   <div class="card glass" onclick="show('survival')">Survival</div>
   <div class="card glass" onclick="show('about')">About</div>
@@ -175,76 +177,61 @@ input{
 
 <div class="ranks-container">
 
+  <!-- PRIME -->
   <div class="item glass prime">
-    <img src="./prime.png">
+    <img src="prime.png" onerror="this.style.display='none'">
     <h3>Prime - ₹149</h3>
+
     <div class="perks">
-      <div>✔ /sit</div>
-      <div>✔ /ec</div>
-      <div>✔ /pv 1</div>
-      <div>✔ /home 3</div>
+      ✔ /sit<br>
+      ✔ /ec<br>
+      ✔ /pv 1<br>
+      ✔ /home 3
     </div>
-    <img src="./prime-kit.png" class="kit-img">
+
     <h4>Prime Kit</h4>
+    <img src="prime-kit.png" class="kit-img"
+         onerror="this.src='https://via.placeholder.com/300x150?text=Prime+Kit'">
   </div>
 
+  <!-- LEORIX+ -->
   <div class="item glass leorix">
-    <img src="./leorixplus.png">
+    <img src="leorixplus.png" onerror="this.style.display='none'">
     <h3>Leorix+ - ₹299</h3>
+
     <div class="perks">
-      <div>✔ /pv 1</div>
-      <div>✔ /ec</div>
-      <div>✔ /craft</div>
-      <div>✔ /anvil</div>
-      <div>✔ /grindstone</div>
-      <div>✔ /hat</div>
-      <div>✔ /sit</div>
-      <div>✔ /kit (7 day cooldown)</div>
-      <div>✔ /home 7</div>
+      ✔ /pv 1<br>
+      ✔ /ec<br>
+      ✔ /craft<br>
+      ✔ /anvil<br>
+      ✔ /grindstone<br>
+      ✔ /hat<br>
+      ✔ /sit<br>
+      ✔ /kit<br>
+      ✔ /home 7
     </div>
-    <img src="./leorix-kit.png" class="kit-img">
+
     <h4>Leorix+ Kit</h4>
+    <img src="leorix-kit.png" class="kit-img"
+         onerror="this.src='https://via.placeholder.com/300x150?text=Leorix+Kit'">
   </div>
 
+  <!-- MYTHIC -->
   <div class="item glass mythic">
-    <img src="./mythic.png">
+    <img src="mythic.png" onerror="this.style.display='none'">
     <h3>Mythic - ₹499</h3>
+
     <div class="perks">
-      <div>✔ /sit</div>
-      <div>✔ /ec</div>
-      <div>✔ /pv 1</div>
-      <div>✔ /anvil</div>
-      <div>✔ /home 5</div>
+      ✔ /sit<br>
+      ✔ /ec<br>
+      ✔ /pv 1<br>
+      ✔ /anvil<br>
+      ✔ /home 5
     </div>
-    <img src="./mythic-kit.png" class="kit-img">
+
     <h4>Mythic Kit</h4>
-  </div>
-
-</div>
-</div>
-
-<!-- COIN SHOP -->
-<div id="coinshop" class="section">
-<button onclick="show('survival')">⬅ Back</button>
-
-<div class="coin-container">
-
-  <div class="coin glass">
-    <h3>100 Coins</h3>
-    <h2>₹49</h2>
-    <button onclick="addToCart('100 Coins',49)">Buy</button>
-  </div>
-
-  <div class="coin glass featured">
-    <h3>1000 Coins</h3>
-    <h1>₹349</h1>
-    <button onclick="addToCart('1000 Coins',349)">Buy</button>
-  </div>
-
-  <div class="coin glass">
-    <h3>500 Coins</h3>
-    <h2>₹199</h2>
-    <button onclick="addToCart('500 Coins',199)">Buy</button>
+    <img src="mythic-kit.png" class="kit-img"
+         onerror="this.src='https://via.placeholder.com/300x150?text=Mythic+Kit'">
   </div>
 
 </div>
@@ -256,21 +243,11 @@ input{
 
 <div class="card glass">
   <h2>Leorix SMP</h2>
-  <p>
-    Best survival server ⚔️<br><br>
-    IP: <b>play.leorixmc.fun</b>
-  </p>
+  <p>IP: <b>play.leorixmc.fun</b></p>
 </div>
 </div>
 
-<!-- CART -->
-<div id="cartBox" class="glass">
-  <h3>Cart</h3>
-  <div id="cartItems"></div>
-  <h4 id="total">₹0</h4>
-</div>
-
-<!-- NAV -->
+<!-- SCRIPT -->
 <script>
 function show(id){
   document.querySelectorAll(".section").forEach(sec=>{
@@ -278,17 +255,15 @@ function show(id){
   });
   document.getElementById(id).classList.add("active");
 }
-</script>
 
-<!-- LOGIN -->
-<script>
+// LOGIN
 function login(){
   const email = document.getElementById("email").value;
   const pass = document.getElementById("password").value;
 
   if(email && pass){
     localStorage.setItem("user", email);
-    document.getElementById("profile").innerText = email;
+    document.getElementById("profile").innerText = "👤 " + email;
     alert("Logged in!");
     show('main');
   } else {
@@ -299,32 +274,8 @@ function login(){
 window.onload = ()=>{
   const user = localStorage.getItem("user");
   if(user){
-    document.getElementById("profile").innerText = user;
+    document.getElementById("profile").innerText = "👤 " + user;
   }
-}
-</script>
-
-<!-- CART -->
-<script>
-let cart = [];
-
-function addToCart(name, price){
-  cart.push({name, price});
-  updateCart();
-  document.getElementById("cartBox").style.display="block";
-}
-
-function updateCart(){
-  let total = 0;
-  let html = "";
-
-  cart.forEach(i=>{
-    html += `<div>${i.name} - ₹${i.price}</div>`;
-    total += i.price;
-  });
-
-  document.getElementById("cartItems").innerHTML = html;
-  document.getElementById("total").innerText = "₹"+total;
 }
 </script>
 
