@@ -15,9 +15,9 @@ body{
   text-align:center;
 }
 
-/* SECTIONS */
+/* FIXED SECTION SYSTEM */
 .section{display:none;}
-.active{display:block;}
+.section.active{display:block;}
 
 /* GLASS */
 .glass{
@@ -60,38 +60,34 @@ button{
 /* RANKS */
 .ranks-container{
   display:flex;
-  justify-content:center;
-  gap:25px;
   flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
   margin-top:20px;
 }
 
-.item{
-  width:270px;
+.rank-box{
+  width:260px;
   padding:15px;
+  background:rgba(0,0,0,0.7);
+  border-radius:12px;
 }
 
-.leorix{transform:scale(1.1);border:2px solid #00ffaa;}
+.leorix{border:2px solid #00ffaa; transform:scale(1.05);}
 .prime{border:1px solid #00ffcc;}
 .mythic{border:1px solid #ff00ff;}
 
 .perks{
-  margin-top:10px;
-  padding:10px;
-  background:rgba(255,255,255,0.08);
-  border-radius:10px;
   text-align:left;
-  font-size:14px;
+  margin-top:10px;
   line-height:1.6;
+  font-size:14px;
 }
 
-/* KIT IMAGE */
 .kit-img{
   width:100%;
-  border-radius:10px;
   margin-top:10px;
-  min-height:120px;
-  object-fit:cover;
+  border-radius:10px;
 }
 
 /* COIN SHOP */
@@ -178,8 +174,7 @@ input{
 <div class="ranks-container">
 
   <!-- PRIME -->
-  <div class="item glass prime">
-    <img src="prime.png" onerror="this.style.display='none'">
+  <div class="rank-box prime">
     <h3>Prime - ₹149</h3>
 
     <div class="perks">
@@ -191,12 +186,11 @@ input{
 
     <h4>Prime Kit</h4>
     <img src="prime-kit.png" class="kit-img"
-         onerror="this.src='https://via.placeholder.com/300x150?text=Prime+Kit'">
+    onerror="this.src='https://via.placeholder.com/300x150?text=Prime+Kit'">
   </div>
 
-  <!-- LEORIX+ -->
-  <div class="item glass leorix">
-    <img src="leorixplus.png" onerror="this.style.display='none'">
+  <!-- LEORIX -->
+  <div class="rank-box leorix">
     <h3>Leorix+ - ₹299</h3>
 
     <div class="perks">
@@ -213,12 +207,11 @@ input{
 
     <h4>Leorix+ Kit</h4>
     <img src="leorix-kit.png" class="kit-img"
-         onerror="this.src='https://via.placeholder.com/300x150?text=Leorix+Kit'">
+    onerror="this.src='https://via.placeholder.com/300x150?text=Leorix+Kit'">
   </div>
 
   <!-- MYTHIC -->
-  <div class="item glass mythic">
-    <img src="mythic.png" onerror="this.style.display='none'">
+  <div class="rank-box mythic">
     <h3>Mythic - ₹499</h3>
 
     <div class="perks">
@@ -231,7 +224,34 @@ input{
 
     <h4>Mythic Kit</h4>
     <img src="mythic-kit.png" class="kit-img"
-         onerror="this.src='https://via.placeholder.com/300x150?text=Mythic+Kit'">
+    onerror="this.src='https://via.placeholder.com/300x150?text=Mythic+Kit'">
+  </div>
+
+</div>
+</div>
+
+<!-- COIN SHOP -->
+<div id="coinshop" class="section">
+<button onclick="show('survival')">⬅ Back</button>
+
+<div class="coin-container">
+
+  <div class="coin glass">
+    <h3>100 Coins</h3>
+    <h2>₹49</h2>
+    <button onclick="addToCart('100 Coins',49)">Buy</button>
+  </div>
+
+  <div class="coin glass featured">
+    <h3>1000 Coins</h3>
+    <h1>₹349</h1>
+    <button onclick="addToCart('1000 Coins',349)">Buy</button>
+  </div>
+
+  <div class="coin glass">
+    <h3>500 Coins</h3>
+    <h2>₹199</h2>
+    <button onclick="addToCart('500 Coins',199)">Buy</button>
   </div>
 
 </div>
@@ -243,8 +263,15 @@ input{
 
 <div class="card glass">
   <h2>Leorix SMP</h2>
-  <p>IP: <b>play.leorixmc.fun</b></p>
+  <p>⚔️ Best Survival Server<br><br>IP: <b>play.leorixmc.fun</b></p>
 </div>
+</div>
+
+<!-- CART -->
+<div id="cartBox" class="glass">
+  <h3>🛒 Cart</h3>
+  <div id="cartItems"></div>
+  <h4 id="total">₹0</h4>
 </div>
 
 <!-- SCRIPT -->
@@ -276,6 +303,28 @@ window.onload = ()=>{
   if(user){
     document.getElementById("profile").innerText = "👤 " + user;
   }
+}
+
+// CART
+let cart = [];
+
+function addToCart(name, price){
+  cart.push({name, price});
+  updateCart();
+  document.getElementById("cartBox").style.display="block";
+}
+
+function updateCart(){
+  let total = 0;
+  let html = "";
+
+  cart.forEach(i=>{
+    html += `<div>${i.name} - ₹${i.price}</div>`;
+    total += i.price;
+  });
+
+  document.getElementById("cartItems").innerHTML = html;
+  document.getElementById("total").innerText = "₹"+total;
 }
 </script>
 
