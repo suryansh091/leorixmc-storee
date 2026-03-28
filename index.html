@@ -15,12 +15,8 @@ body{
   text-align:center;
 }
 
-/* IMPORTANT FIX */
-.hidden{
-  display:none !important;
-}
+.hidden{display:none !important;}
 
-/* GLASS */
 .glass{
   background:rgba(0,0,0,0.6);
   backdrop-filter:blur(8px);
@@ -28,7 +24,6 @@ body{
   box-shadow:0 0 20px rgba(0,255,200,0.2);
 }
 
-/* BUTTON */
 button{
   padding:10px 15px;
   margin:5px;
@@ -39,7 +34,6 @@ button{
   cursor:pointer;
 }
 
-/* CARDS */
 .card{
   margin:20px auto;
   padding:25px;
@@ -47,14 +41,12 @@ button{
   cursor:pointer;
 }
 
-/* ITEMS */
 .item{
   margin:20px auto;
   padding:15px;
   width:260px;
 }
 
-/* RANK LAYOUT */
 .ranks-container{
   display:flex;
   justify-content:center;
@@ -63,12 +55,10 @@ button{
   flex-wrap:wrap;
 }
 
-/* RANK SPECIALS */
 .prime{border:1px solid #00ffcc;}
 .leorix{border:2px solid #00ffaa; transform:scale(1.1);}
 .mythic{border:1px solid #ff00ff;}
 
-/* PERKS */
 .perks{
   margin-top:10px;
   padding:10px;
@@ -81,11 +71,19 @@ button{
   font-size:14px;
 }
 
-/* KIT IMAGE */
 .kit-img{
   width:100%;
   border-radius:10px;
   margin-top:10px;
+}
+
+/* PROFILE ICON */
+#profile{
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-size:22px;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -94,8 +92,10 @@ button{
 
 <!-- MAIN -->
 <div id="main">
+  <div id="profile" onclick="login()">👤</div>
+
   <div class="card glass" onclick="show('survival')">Survival</div>
-  <button onclick="login()">Login</button>
+  <div class="card glass" onclick="show('about')">About</div>
 </div>
 
 <!-- SURVIVAL -->
@@ -103,7 +103,6 @@ button{
   <button onclick="show('main')">⬅ Back</button>
   <div class="card glass" onclick="show('ranks')">Ranks</div>
   <div class="card glass" onclick="show('coinshop')">Coin Shop</div>
-  <div class="card glass" onclick="show('about')">About</div>
 </div>
 
 <!-- RANKS -->
@@ -168,23 +167,26 @@ button{
     <div class="item glass">
       <img src="./100coins.png" style="width:100%;border-radius:10px;">
       <h3>100 Coins - ₹49</h3>
+      <button onclick="addToCart('100 Coins',49)">Buy</button>
     </div>
 
     <div class="item glass">
       <img src="./500coins.png" style="width:100%;border-radius:10px;">
       <h3>500 Coins - ₹199</h3>
+      <button onclick="addToCart('500 Coins',199)">Buy</button>
     </div>
 
     <div class="item glass">
       <img src="./1000coins.png" style="width:100%;border-radius:10px;">
       <h3>1000 Coins - ₹349</h3>
+      <button onclick="addToCart('1000 Coins',349)">Buy</button>
     </div>
   </div>
 </div>
 
 <!-- ABOUT -->
 <div id="about" class="hidden">
-  <button onclick="show('survival')">⬅ Back</button>
+  <button onclick="show('main')">⬅ Back</button>
 
   <div class="card glass">
     <h2>About Leorix SMP</h2>
@@ -199,7 +201,15 @@ button{
   </div>
 </div>
 
-<!-- STRONG JS FIX -->
+<!-- CART -->
+<div id="cartBox" class="glass hidden" style="position:fixed;bottom:20px;right:20px;padding:15px;width:250px;">
+  <h3>Cart</h3>
+  <div id="cartItems"></div>
+  <h4 id="total">Total: ₹0</h4>
+  <button onclick="checkout()">Checkout</button>
+</div>
+
+<!-- NAVIGATION -->
 <script>
 function show(id){
   const sections = ["main","survival","ranks","coinshop","about"];
@@ -210,34 +220,63 @@ function show(id){
 }
 </script>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-
+<!-- CART SYSTEM -->
 <script>
+let cart = [];
+
+function addToCart(name, price){
+  cart.push({name, price});
+  updateCart();
+  document.getElementById("cartBox").classList.remove("hidden");
+}
+
+function updateCart(){
+  let html = "";
+  let total = 0;
+
+  cart.forEach(item=>{
+    html += `<div>${item.name} - ₹${item.price}</div>`;
+    total += item.price;
+  });
+
+  document.getElementById("cartItems").innerHTML = html;
+  document.getElementById("total").innerText = "Total: ₹" + total;
+}
+
+function checkout(){
+  alert("Payment system coming next 😎");
+}
+</script>
+
+<!-- FIREBASE LOGIN (FIXED) -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDaiP357SClEvOcQEm5Rz-X_9X1iXGrqic",
   authDomain: "leorixstore.firebaseapp.com",
   projectId: "leorixstore"
 };
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-function login(){
+window.login = function(){
   const email = prompt("Enter Email");
   const pass = prompt("Enter Password");
 
-  auth.signInWithEmailAndPassword(email, pass)
-  .then(()=> alert("Login Successful"))
+  signInWithEmailAndPassword(auth, email, pass)
+  .then(()=>{
+    document.getElementById("profile").innerText = "🟢";
+    alert("Logged in!");
+  })
   .catch(err=> alert(err.message));
 }
 
-const adminEmail = "admin@gmail.com";
-
-auth.onAuthStateChanged(user=>{
-  if(user && user.email === adminEmail){
-    console.log("Admin Logged In");
+onAuthStateChanged(auth, user=>{
+  if(user){
+    document.getElementById("profile").innerText = "🟢";
   }
 });
 </script>
