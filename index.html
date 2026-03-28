@@ -87,7 +87,7 @@ button{
   z-index:999;
 }
 
-/* COIN BOX IMPROVED */
+/* COIN BOX */
 .coin-box{
   width:280px;
   padding:20px;
@@ -233,20 +233,20 @@ button{
   <button onclick="login()">Login</button>
 </div>
 
+<!-- NAV FIX -->
 <script>
 function show(id){
   const sections = ["main","survival","ranks","coinshop","about"];
   sections.forEach(sec=>{
-    document.getElementById(sec).style.display = "none";
+    document.getElementById(sec).classList.add("hidden");
   });
-  document.getElementById(id).style.display = "block";
+  document.getElementById(id).classList.remove("hidden");
 }
 </script>
 
+<!-- CART -->
 <script>
-let cart=[];
 function addToCart(name,price){
-  cart.push({name,price});
   alert(name+" added to cart");
 }
 </script>
