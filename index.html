@@ -1,4 +1,7 @@
 
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +73,6 @@ button:hover{
   transition:0.3s;
 }
 
-/* HIDE */
 .hidden{display:none}
 
 /* PROFILE */
@@ -84,10 +86,9 @@ button:hover{
   cursor:pointer;
 }
 
-/* EMAIL */
 #emailBox{
   position:absolute;
-  top:50px;
+  top:60px;
   right:15px;
   background:#111;
   padding:10px;
@@ -126,39 +127,10 @@ input{
   to{box-shadow:0 0 30px #00ffcc;}
 }
 
-/* ===================== */
-/* 🔥 RANK GLOW SYSTEM */
-/* ===================== */
-
-@keyframes primeGlow{
-  0%{box-shadow:0 0 10px #00ffcc;}
-  100%{box-shadow:0 0 25px #00ffcc;}
-}
-
-@keyframes leorixGlow{
-  0%{box-shadow:0 0 10px #00ffaa;}
-  100%{box-shadow:0 0 30px #00ffaa;}
-}
-
-@keyframes mythicGlow{
-  0%{box-shadow:0 0 10px #ff00cc;}
-  100%{box-shadow:0 0 40px #ff00ff;}
-}
-
-.prime{
-  border:1px solid #00ffcc;
-  animation:primeGlow 2s infinite alternate;
-}
-
-.leorix{
-  border:1px solid #00ffaa;
-  animation:leorixGlow 2s infinite alternate;
-}
-
-.mythic{
-  border:1px solid #ff00ff;
-  animation:mythicGlow 2s infinite alternate;
-}
+/* RANK STYLES */
+.prime{border:1px solid #00ffcc;}
+.leorix{border:1px solid #00ffaa;}
+.mythic{border:1px solid #ff00ff;}
 
 .perks{
   text-align:left;
@@ -169,13 +141,38 @@ input{
   background:rgba(255,255,255,0.05);
   border-radius:10px;
 }
+
+/* RANK LAYOUT */
+.ranks-container{
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.ranks-container .leorix{
+  transform:scale(1.1);
+}
+
+/* COINS */
+.coins-container{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+}
+
+.coins-container .middle{
+  transform:scale(1.1);
+}
 </style>
 </head>
 
 <body>
 
 <!-- PROFILE -->
-<div id="profile" class="hidden glass" onclick="toggleEmail()">Your Account</div>
+<div id="profile" class="hidden glass" onclick="toggleEmail()">Account</div>
 <div id="emailBox" class="hidden glass"></div>
 
 <!-- LOGO -->
@@ -185,6 +182,7 @@ input{
 
 <!-- LOGIN -->
 <button onclick="toggleLogin()" id="loginBtn">Login</button>
+<button onclick="logout()" id="logoutBtn" class="hidden">Logout</button>
 
 <div id="loginBox" class="hidden glass">
 <input id="email" placeholder="Email"><br>
@@ -209,54 +207,46 @@ input{
 <div id="ranks" class="hidden">
 <button onclick="show('survival')">⬅ Back</button>
 
-<div class="item glass prime">
-<img src="./prime.png" style="width:100%;border-radius:10px;">
-<h3>Prime - ₹149</h3>
-<div class="perks">
-✔ /sit<br>
-✔ /ec<br>
-✔ /pv 1<br>
-✔ /home 3
-</div>
-</div>
+<div class="ranks-container">
 
-<div class="item glass leorix">
-<img src="./leorixplus.png" style="width:100%;border-radius:10px;">
-<h3>Leorix+ - ₹299</h3>
-<div class="perks">
-✔ /pv 1<br>
-✔ /ec<br>
-✔ /craft<br>
-✔ /anvil<br>
-✔ /grindstone<br>
-✔ /hat<br>
-✔ /sit<br>
-✔ /kit (7 day cooldown)<br>
-✔ /home 7
-</div>
-</div>
+  <!-- PRIME -->
+  <div class="item glass prime">
+    <img src="./prime.png" style="width:100%;border-radius:10px;">
+    <h3>Prime - ₹149</h3>
+    <div class="perks">✔ Prime Kit ✔ /sit ✔ /ec ✔ /pv 1 ✔ /home 3</div>
+  </div>
 
-<div class="item glass mythic">
-<img src="./mythic.png" style="width:100%;border-radius:10px;">
-<h3>Mythic - ₹499</h3>
-<div class="perks">
-✔ /sit<br>
-✔ /ec<br>
-✔ /pv 1<br>
-✔ /anvil<br>
-✔ /home 5
-</div>
-</div>
+  <!-- LEORIX+ (CENTER) -->
+  <div class="item glass leorix">
+    <img src="./leorixplus.png" style="width:100%;border-radius:10px;">
+    <h3>Leorix+ - ₹299</h3>
+    <div class="perks">✔ Leorix+ Kit ✔ /pv ✔ /ec ✔ /craft ✔ /kit ✔ /home 7</div>
+  </div>
 
+  <!-- MYTHIC -->
+  <div class="item glass mythic">
+    <img src="./mythic.png" style="width:100%;border-radius:10px;">
+    <h3>Mythic - ₹499</h3>
+    <div class="perks">✔ Mythic Kit ✔ /sit ✔ /ec ✔ /pv ✔ /home 5</div>
+  </div>
+
+</div>
 </div>
 
 <!-- COINS -->
 <div id="coins" class="hidden">
 <button onclick="show('survival')">⬅ Back</button>
 
+<div class="coins-container">
+
 <div class="item glass">
 <img src="./100coins.png" style="width:100%;border-radius:10px;">
 <h3>100 Coins - ₹50</h3>
+</div>
+
+<div class="item glass middle">
+<img src="./1000coins.png" style="width:100%;border-radius:10px;">
+<h3>1000 Coins - ₹350</h3>
 </div>
 
 <div class="item glass">
@@ -264,31 +254,24 @@ input{
 <h3>500 Coins - ₹200</h3>
 </div>
 
-<div class="item glass">
-<img src="./1000coins.png" style="width:100%;border-radius:10px;">
-<h3>1000 Coins - ₹350</h3>
 </div>
-
 </div>
 
 <!-- ABOUT -->
 <div id="about" class="hidden">
 <button onclick="show('main')">⬅ Back</button>
-
-<div class="about-box glass">
-play.leorixmc.fun
-</div>
-
+<div class="about-box glass">play.leorixmc.fun</div>
 </div>
 
 <!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDaiP357SClEvOcQEm5Rz-X_9X1iXGrqic",
-  authDomain: "leorixstore.firebaseapp.com",
+  apiKey: "YOUR_KEY",
+  authDomain: "leorixstore.firebaseauth.com",
   projectId: "leorixstore"
 };
 
@@ -300,28 +283,33 @@ window.login = function(){
   const pass=document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth,email,pass)
-  .then(()=>{
-    alert("Logged in");
-    document.getElementById("loginBox").classList.add("hidden");
-  })
+  .then(()=>alert("Logged in"))
   .catch(e=>alert(e.message));
+}
+
+window.logout = function(){
+  signOut(auth);
 }
 
 onAuthStateChanged(auth,(user)=>{
   if(user){
     document.getElementById("profile").classList.remove("hidden");
     document.getElementById("loginBtn").style.display="none";
+    document.getElementById("logoutBtn").classList.remove("hidden");
     document.getElementById("emailBox").innerText=user.email;
+  } else {
+    document.getElementById("profile").classList.add("hidden");
+    document.getElementById("loginBtn").style.display="inline-block";
+    document.getElementById("logoutBtn").classList.add("hidden");
+    document.getElementById("emailBox").innerText="";
   }
 });
 </script>
 
-<!-- NAV -->
 <script>
 function show(id){
   document.querySelectorAll("#main,#survival,#ranks,#coins,#about")
   .forEach(e=>e.classList.add("hidden"));
-
   document.getElementById(id).classList.remove("hidden");
 }
 
